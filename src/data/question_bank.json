@@ -1,0 +1,197 @@
+{
+  "foundation": [
+    {
+      "id": "F1",
+      "domain": "Fraction & Decimal Understanding",
+      "question": "A student says: '3/8 is greater than 1/2 because 3 is greater than 1.' Which statement best evaluates the student's reasoning?",
+      "correctAnswer": "C",
+      "diagnosticGap": "Fraction comparison reasoning"
+    },
+    {
+      "id": "F2",
+      "domain": "Fraction & Decimal Understanding",
+      "question": "A student claims: '0.6 and 0.60 are different numbers because one has more digits.' Which statement is true?",
+      "correctAnswer": "B",
+      "diagnosticGap": "Decimal place value"
+    },
+    {
+      "id": "F3",
+      "domain": "Fraction & Decimal Understanding",
+      "question": "A recipe uses 3/4 cup of milk. A baker makes half the recipe. Which student has the correct reasoning?",
+      "correctAnswer": "B",
+      "diagnosticGap": "Fraction as quantity"
+    },
+    {
+      "id": "F4",
+      "domain": "Multiplicative Thinking",
+      "question": "A recipe uses flour and sugar in a ratio of 5:2. If the recipe uses 15 cups of flour, how much sugar is needed?",
+      "correctAnswer": "B",
+      "diagnosticGap": "Scaling relationships"
+    },
+    {
+      "id": "F5",
+      "domain": "Multiplicative Thinking",
+      "question": "Two students compare 8/12 and 10/15. Who is correct?",
+      "correctAnswer": "B",
+      "diagnosticGap": "Equivalent ratios"
+    },
+    {
+      "id": "F6",
+      "domain": "Mathematical Reasoning",
+      "question": "A student says: 'Multiplying always makes numbers larger.' Which example disproves the claim?",
+      "correctAnswer": "C",
+      "diagnosticGap": "Conceptual multiplication"
+    },
+    {
+      "id": "F7",
+      "domain": "Mathematical Reasoning",
+      "question": "Every even number is divisible by 4. Which number shows this is false?",
+      "correctAnswer": "C",
+      "diagnosticGap": "Counterexample reasoning"
+    },
+    {
+      "id": "F8",
+      "domain": "Mathematical Reasoning",
+      "question": "Pattern: 4,7,10,13... What is the 20th term?",
+      "correctAnswer": "B",
+      "diagnosticGap": "Generalization"
+    },
+    {
+      "id": "F9",
+      "domain": "Problem Solving & Modeling",
+      "question": "Field trip buses: 126 students, 48 seats per bus. Three buses enough?",
+      "correctAnswer": "B",
+      "diagnosticGap": "Context interpretation"
+    },
+    {
+      "id": "F10",
+      "domain": "Problem Solving & Modeling",
+      "question": "One-third of a full bottle was consumed. Who is correct: two-thirds remains or one-half remains?",
+      "correctAnswer": "A",
+      "diagnosticGap": "Fraction interpretation"
+    },
+    {
+      "id": "F11",
+      "domain": "Problem Solving & Modeling",
+      "question": "A jacket costs $80 with 25% off. Which statement must be true?",
+      "correctAnswer": "B",
+      "diagnosticGap": "Percent reasoning"
+    },
+    {
+      "id": "F12",
+      "domain": "Fraction & Decimal Understanding",
+      "question": "If fractions have the same denominator, what should be compared?",
+      "correctAnswer": "A",
+      "diagnosticGap": "Fraction structure"
+    },
+    {
+      "id": "F13",
+      "domain": "Mathematical Reasoning",
+      "question": "A student solves 24 \u00f7 6 = 8. What best explains the error?",
+      "correctAnswer": "B",
+      "diagnosticGap": "Operation sense"
+    },
+    {
+      "id": "F14",
+      "domain": "Estimation & Precision",
+      "question": "A student estimates 198\u00d749 by calculating 200\u00d750. Which statement is true?",
+      "correctAnswer": "B",
+      "diagnosticGap": "Estimation"
+    },
+    {
+      "id": "F15",
+      "domain": "Estimation & Precision",
+      "question": "A student claims 17\u00d78=1360. What is the strongest reason it is unreasonable?",
+      "correctAnswer": "A",
+      "diagnosticGap": "Magnitude reasoning"
+    }
+  ],
+  "grade5": [
+    {
+      "id": "G5-1",
+      "correctAnswer": "B"
+    },
+    {
+      "id": "G5-2",
+      "correctAnswer": "B"
+    },
+    {
+      "id": "G5-3",
+      "correctAnswer": "B"
+    },
+    {
+      "id": "G5-4",
+      "correctAnswer": "B"
+    },
+    {
+      "id": "G5-5",
+      "correctAnswer": "B"
+    }
+  ],
+  "grade6": [
+    {
+      "id": "G6-1",
+      "correctAnswer": "B"
+    },
+    {
+      "id": "G6-2",
+      "correctAnswer": "A"
+    },
+    {
+      "id": "G6-3",
+      "correctAnswer": "A"
+    },
+    {
+      "id": "G6-4",
+      "correctAnswer": "A"
+    },
+    {
+      "id": "G6-5",
+      "correctAnswer": "A"
+    }
+  ],
+  "grade7": [
+    {
+      "id": "G7-1",
+      "correctAnswer": "C"
+    },
+    {
+      "id": "G7-2",
+      "correctAnswer": "A"
+    },
+    {
+      "id": "G7-3",
+      "correctAnswer": "A"
+    },
+    {
+      "id": "G7-4",
+      "correctAnswer": "A"
+    },
+    {
+      "id": "G7-5",
+      "correctAnswer": "B"
+    }
+  ],
+  "challenge": [
+    {
+      "id": "C1",
+      "correctAnswer": "B"
+    },
+    {
+      "id": "C2",
+      "correctAnswer": "C"
+    },
+    {
+      "id": "C3",
+      "correctAnswer": "A"
+    },
+    {
+      "id": "C4",
+      "correctAnswer": "A"
+    },
+    {
+      "id": "C5",
+      "correctAnswer": "B"
+    }
+  ]
+}
