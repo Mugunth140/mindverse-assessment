@@ -117,7 +117,7 @@ export default function Home() {
             <div className="space-y-1">
               <Input 
                 placeholder="Parent's Name" 
-                className="h-12 border-2 border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
+                className="h-12 border border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
                 {...register("parentName")}
                 error={!!errors.parentName}
               />
@@ -128,7 +128,7 @@ export default function Home() {
               <Input 
                 type="email"
                 placeholder="Parent's Email" 
-                className="h-12 border-2 border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
+                className="h-12 border border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
                 {...register("email")}
                 error={!!errors.email}
               />
@@ -139,7 +139,7 @@ export default function Home() {
               <Input 
                 type="tel"
                 placeholder="Phone Number" 
-                className="h-12 border-2 border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
+                className="h-12 border border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
                 {...register("phone")}
                 error={!!errors.phone}
               />
@@ -155,7 +155,7 @@ export default function Home() {
             <div className="space-y-1">
               <Input 
                 placeholder="Student's Name" 
-                className="h-12 border-2 border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
+                className="h-12 border border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
                 {...register("studentName")}
                 error={!!errors.studentName}
               />
