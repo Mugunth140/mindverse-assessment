@@ -40,7 +40,7 @@ export default function Home() {
   };
 
   return (
-    <main className="h-screen w-full bg-brand-ivory flex flex-col lg:flex-row items-center justify-center p-4 md:p-8 lg:p-12 gap-8 lg:gap-16 relative overflow-hidden">
+    <main className="min-h-[100dvh] lg:h-screen w-full bg-brand-ivory flex flex-col lg:flex-row items-center justify-center p-4 py-10 md:p-8 lg:p-12 gap-10 lg:gap-16 relative overflow-y-auto overflow-x-hidden lg:overflow-hidden">
       
       {/* Intentional Geometric Accents with Subtle Animations */}
       <motion.div 

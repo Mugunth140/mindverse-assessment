@@ -157,7 +157,7 @@ export default function AssessmentPage() {
       </header>
 
       {/* Main Question Area */}
-      <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6 md:p-8 flex flex-col justify-center">
+      <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6 md:p-8 flex flex-col justify-start sm:justify-center">
         <AnimatePresence mode="wait">
           {currentSection === "TRANSITION" ? (
             <motion.div
