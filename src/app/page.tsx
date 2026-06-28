@@ -8,7 +8,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
 
 const schema = z.object({
   parentName: z.string().min(2, "Parent name is required"),
@@ -33,149 +32,167 @@ export default function Home() {
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    // In a real app, save to Supabase here.
-    // For now, save to localStorage to persist across routes
     localStorage.setItem("mindverse_user", JSON.stringify(data));
-    localStorage.removeItem("mindverse_assessment_progress"); // Reset previous progress
-    
-    // Slight delay for UX
+    localStorage.removeItem("mindverse_assessment_progress");
     setTimeout(() => {
       router.push("/assessment");
     }, 800);
   };
 
   return (
-    <main className="flex-1 flex flex-col md:flex-row min-h-screen">
-      {/* Left side: Hero/Brand */}
-      <div className="w-full md:w-1/2 bg-brand-indigo text-white p-8 md:p-12 flex flex-col justify-center relative overflow-hidden">
-        {/* Abstract background elements */}
-        <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-72 h-72 bg-brand-orange/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[400px] h-[400px] bg-brand-green/20 rounded-full blur-3xl pointer-events-none" />
+    <main className="h-screen w-full bg-brand-ivory flex flex-col lg:flex-row items-center justify-center p-4 md:p-8 lg:p-12 gap-8 lg:gap-16 relative overflow-hidden">
+      
+      {/* Intentional Geometric Accents with Subtle Animations */}
+      <motion.div 
+        className="absolute top-8 left-8 w-24 h-24 bg-brand-coral rounded-full border-[3px] border-brand-indigo hidden lg:block -z-10"
+        animate={{ scale: [1, 1.05, 1], y: [0, -10, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div 
+        className="absolute bottom-8 right-16 w-32 h-32 bg-brand-green rounded-tl-[80px] rounded-br-[80px] border-[3px] border-brand-indigo hidden lg:block -z-10"
+        animate={{ y: [0, -15, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      />
+      <motion.div 
+        className="absolute top-1/3 right-1/2 w-12 h-12 bg-brand-orange border-[3px] border-brand-indigo hidden lg:block -z-10"
+        animate={{ rotate: [12, 102, 12] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div 
+        className="absolute bottom-1/4 left-1/4 w-8 h-8 bg-brand-lavender rounded-full border-[3px] border-brand-indigo hidden lg:block -z-10"
+        animate={{ x: [0, 15, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+      />
+
+      {/* Left side: Editorial Typography */}
+      <div className="w-full lg:w-1/2 relative z-10 flex flex-col justify-center">
+        <div className="inline-flex border-2 border-brand-indigo bg-brand-lavender text-brand-indigo px-3 py-1.5 rounded-full text-[10px] font-black tracking-widest uppercase mb-6 w-max shadow-[3px_3px_0_0_#22208C]">
+          Bridge to Middle School
+        </div>
         
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="relative z-10"
-        >
-          <div className="inline-block bg-white/10 border border-white/20 px-3 py-1 rounded-full text-xs font-semibold tracking-wider text-brand-lavender mb-6">
-            BRIDGE TO MIDDLE SCHOOL MATH
+        <h1 className="text-4xl md:text-5xl lg:text-[4rem] font-heading font-black text-brand-indigo leading-[1.05] mb-6 tracking-tight">
+          Is Your Child <br />
+          Ready for <br />
+          <span className="relative inline-block mt-1">
+            <span className="relative z-10 px-3 py-1 text-white inline-block">Pre-Algebra?</span>
+            <span className="absolute inset-0 bg-brand-orange rounded-xl rotate-2 border-[3px] border-brand-indigo z-0" />
+          </span>
+        </h1>
+        
+        <p className="text-base md:text-lg text-brand-charcoal max-w-md font-medium leading-relaxed mb-8">
+          Take our 15-minute diagnostic to identify hidden foundational math gaps. Get a personalized report and an immediate action plan.
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-3 text-brand-indigo font-bold">
+          <div className="flex items-center justify-center bg-white border-2 border-brand-indigo px-4 py-2.5 rounded-xl shadow-[3px_3px_0_0_#22208C] text-sm">
+            Free Diagnostic
           </div>
-          <h1 className="text-4xl lg:text-5xl font-heading font-bold leading-tight mb-4">
-            Is Your Child Ready <br/>
-            <span className="text-brand-orange">for Pre-Algebra?</span>
-          </h1>
-          <p className="text-base md:text-lg text-white/80 max-w-md leading-relaxed mb-8">
-            Take our 15-minute diagnostic to identify hidden foundational math gaps. Get a personalized report and immediate action plan to build unshakeable confidence.
-          </p>
-          
-          <div className="flex flex-wrap items-center gap-4 text-sm font-medium text-white/70">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-brand-green animate-pulse" /> Free Diagnostic
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-brand-coral animate-pulse" /> Instant Report via Email
-            </div>
+          <div className="flex items-center justify-center bg-white border-2 border-brand-indigo px-4 py-2.5 rounded-xl shadow-[3px_3px_0_0_#22208C] text-sm">
+            Instant Email Report
           </div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Right side: Form */}
-      <div className="w-full md:w-1/2 bg-brand-ivory p-6 md:p-8 flex items-center justify-center">
+      {/* Right side: Tactile Form */}
+      <div className="w-full lg:w-[440px] relative z-10">
         <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="w-full max-w-md"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, type: "spring", bounce: 0.4 }}
+          className="bg-white rounded-[2rem] border-[3px] border-brand-indigo shadow-[8px_8px_0_0_#22208C] p-6 md:p-8 relative"
         >
-          <Card className="border-none shadow-xl shadow-brand-indigo/5 bg-white overflow-hidden">
-            <div className="h-1.5 bg-gradient-to-r from-brand-orange to-brand-coral w-full" />
-            <CardHeader className="pt-6 pb-2">
-              <CardTitle className="text-2xl text-brand-indigo mb-1">Get Started</CardTitle>
-              <CardDescription className="text-sm">
-                Enter your details to begin the assessment for your child.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                <div className="space-y-1">
-                  <Input 
-                    placeholder="Parent's Name" 
-                    className="h-12"
-                    {...register("parentName")}
-                    error={!!errors.parentName}
-                  />
-                  {errors.parentName && <p className="text-red-500 text-xs ml-2">{errors.parentName.message}</p>}
-                </div>
-                
-                <div className="space-y-1">
-                  <Input 
-                    type="email"
-                    placeholder="Parent's Email" 
-                    className="h-12"
-                    {...register("email")}
-                    error={!!errors.email}
-                  />
-                  {errors.email && <p className="text-red-500 text-xs ml-2">{errors.email.message}</p>}
-                </div>
+          {/* Decorative clip */}
+          <motion.div 
+            className="absolute -top-5 -right-5 w-10 h-10 bg-brand-lavender border-[3px] border-brand-indigo rounded-full shadow-[3px_3px_0_0_#22208C] hidden md:block"
+            animate={{ rotate: [0, 15, -5, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          />
 
-                <div className="space-y-1">
-                  <Input 
-                    type="tel"
-                    placeholder="Phone Number" 
-                    className="h-12"
-                    {...register("phone")}
-                    error={!!errors.phone}
-                  />
-                  {errors.phone && <p className="text-red-500 text-xs ml-2">{errors.phone.message}</p>}
-                </div>
+          <div className="mb-6">
+            <h2 className="text-2xl font-heading font-black text-brand-indigo mb-1">Get Started</h2>
+            <p className="text-sm text-brand-charcoal/70 font-medium">Enter your details to begin.</p>
+          </div>
+          
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="space-y-1">
+              <Input 
+                placeholder="Parent's Name" 
+                className="h-12 border-2 border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
+                {...register("parentName")}
+                error={!!errors.parentName}
+              />
+              {errors.parentName && <p className="text-red-500 text-xs font-bold ml-1">{errors.parentName.message}</p>}
+            </div>
+            
+            <div className="space-y-1">
+              <Input 
+                type="email"
+                placeholder="Parent's Email" 
+                className="h-12 border-2 border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
+                {...register("email")}
+                error={!!errors.email}
+              />
+              {errors.email && <p className="text-red-500 text-xs font-bold ml-1">{errors.email.message}</p>}
+            </div>
 
-                <div className="pt-2 pb-1">
-                  <div className="h-px w-full bg-brand-charcoal/10" />
-                </div>
+            <div className="space-y-1">
+              <Input 
+                type="tel"
+                placeholder="Phone Number" 
+                className="h-12 border-2 border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
+                {...register("phone")}
+                error={!!errors.phone}
+              />
+              {errors.phone && <p className="text-red-500 text-xs font-bold ml-1">{errors.phone.message}</p>}
+            </div>
 
-                <div className="space-y-1">
-                  <Input 
-                    placeholder="Student's Name" 
-                    className="h-12"
-                    {...register("studentName")}
-                    error={!!errors.studentName}
-                  />
-                  {errors.studentName && <p className="text-red-500 text-xs ml-2">{errors.studentName.message}</p>}
-                </div>
+            <div className="pt-1 pb-1 flex items-center gap-3">
+              <div className="h-[2px] w-full bg-brand-indigo/5 rounded-full" />
+              <span className="text-brand-indigo/40 font-black text-[10px] uppercase tracking-widest">Student</span>
+              <div className="h-[2px] w-full bg-brand-indigo/5 rounded-full" />
+            </div>
 
-                <div className="space-y-2">
-                  <label className="text-xs font-semibold text-brand-charcoal ml-2">Entering Grade Level</label>
-                  <div className="grid grid-cols-3 gap-2">
-                    {["5", "6", "7"].map((grade) => (
-                      <button
-                        key={grade}
-                        type="button"
-                        onClick={() => setValue("gradeLevel", grade as "5"|"6"|"7")}
-                        className={`py-2 text-sm rounded-xl border-2 font-heading font-semibold transition-all ${
-                          selectedGrade === grade 
-                            ? "border-brand-indigo bg-brand-indigo/5 text-brand-indigo" 
-                            : "border-brand-charcoal/10 text-brand-charcoal/60 hover:border-brand-indigo/30"
-                        }`}
-                      >
-                        Grade {grade}
-                      </button>
-                    ))}
-                  </div>
-                  {errors.gradeLevel && <p className="text-red-500 text-xs ml-2">{errors.gradeLevel.message}</p>}
-                </div>
+            <div className="space-y-1">
+              <Input 
+                placeholder="Student's Name" 
+                className="h-12 border-2 border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
+                {...register("studentName")}
+                error={!!errors.studentName}
+              />
+              {errors.studentName && <p className="text-red-500 text-xs font-bold ml-1">{errors.studentName.message}</p>}
+            </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full mt-2" 
-                  size="md"
-                  isLoading={isSubmitting}
-                >
-                  Start Assessment
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
+            {/* Segmented Control for Grade Selection */}
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-bold text-brand-indigo ml-1 uppercase tracking-wider">Entering Grade Level</label>
+              <div className="flex bg-brand-ivory/50 border-2 border-brand-indigo/20 rounded-xl p-1 gap-1">
+                {["5", "6", "7"].map((grade) => (
+                  <button
+                    key={grade}
+                    type="button"
+                    onClick={() => setValue("gradeLevel", grade as "5"|"6"|"7")}
+                    className={`flex-1 py-2 text-sm rounded-lg font-heading font-black transition-all ${
+                      selectedGrade === grade 
+                        ? "bg-brand-indigo text-white shadow-md" 
+                        : "bg-transparent text-brand-indigo/50 hover:bg-brand-indigo/10 hover:text-brand-indigo"
+                    }`}
+                  >
+                    Grade {grade}
+                  </button>
+                ))}
+              </div>
+              {errors.gradeLevel && <p className="text-red-500 text-xs font-bold ml-1">{errors.gradeLevel.message}</p>}
+            </div>
+
+            <Button 
+              type="submit" 
+              className="w-full mt-2 h-14 text-lg rounded-xl shadow-[0_4px_0_0_rgba(34,32,140,0.2)]" 
+              variant="secondary"
+              isLoading={isSubmitting}
+            >
+              Start Assessment
+            </Button>
+          </form>
         </motion.div>
       </div>
     </main>
