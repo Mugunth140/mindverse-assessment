@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Card, CardContent } from "@/components/ui/Card";
+import { Sparkles, ArrowRight } from "lucide-react";
 import { PARENT_QUESTIONS } from "@/data/parent_questions";
 import { STUDENT_QUESTIONS } from "@/data/student_questions";
 
@@ -156,34 +157,43 @@ export default function AssessmentPage() {
       </header>
 
       {/* Main Question Area */}
-      <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6 md:p-8 flex flex-col justify-start">
+      <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6 md:p-8 flex flex-col justify-center">
         <AnimatePresence mode="wait">
           {currentSection === "TRANSITION" ? (
             <motion.div
               key="transition"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.4 }}
-              className="text-center mt-10"
+              className="text-center w-full max-w-md mx-auto mt-4"
             >
-              <Card className="border-none shadow-xl shadow-brand-indigo/5 bg-brand-indigo text-white overflow-hidden relative">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" />
-                <CardContent className="p-10 md:p-14 flex flex-col items-center">
-                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-3xl mb-6">
-                    👋
-                  </div>
-                  <h2 className="text-3xl font-heading font-bold mb-4">
-                    Thank you!
-                  </h2>
-                  <p className="text-lg text-white/80 max-w-sm mx-auto mb-8">
-                    The parent portion is complete. Please hand the device over to {userData.studentName} for the math diagnostic.
-                  </p>
-                  <Button size="lg" variant="secondary" onClick={handleNext}>
-                    I am {userData.studentName}, let's go!
-                  </Button>
-                </CardContent>
-              </Card>
+              <div className="bg-white rounded-3xl p-8 md:p-12 shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-brand-charcoal/5 flex flex-col items-center">
+                <motion.div 
+                  className="w-16 h-16 bg-brand-green/10 rounded-2xl flex items-center justify-center text-brand-green mb-6"
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <Sparkles className="w-8 h-8" />
+                </motion.div>
+                
+                <h2 className="text-2xl md:text-3xl font-heading font-bold text-brand-charcoal mb-3 tracking-tight">
+                  Thank You!
+                </h2>
+                
+                <p className="text-base text-brand-charcoal/60 mb-8 leading-relaxed">
+                  The parent portion is complete. Please hand the device over to <span className="font-bold text-brand-indigo">{userData.studentName}</span> for the math diagnostic.
+                </p>
+                
+                <Button 
+                  size="lg" 
+                  variant="primary" 
+                  onClick={handleNext}
+                  className="w-full h-14 text-base rounded-xl shadow-md shadow-brand-indigo/10 group flex items-center justify-center gap-2"
+                >
+                  I am {userData.studentName}, let's go!
+                </Button>
+              </div>
             </motion.div>
           ) : (
             <motion.div

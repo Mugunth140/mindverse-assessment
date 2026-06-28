@@ -59,23 +59,22 @@ export default function Home() {
           className="relative z-10"
         >
           <div className="inline-block bg-white/10 border border-white/20 px-3 py-1 rounded-full text-xs font-semibold tracking-wider text-brand-lavender mb-6">
-            MINDVERSE LEARNING
+            BRIDGE TO MIDDLE SCHOOL MATH
           </div>
           <h1 className="text-4xl lg:text-5xl font-heading font-bold leading-tight mb-4">
-            Middle School <br/>
-            <span className="text-brand-orange">Math Readiness</span> <br/>
-            Diagnostic
+            Is Your Child Ready <br/>
+            <span className="text-brand-orange">for Pre-Algebra?</span>
           </h1>
           <p className="text-base md:text-lg text-white/80 max-w-md leading-relaxed mb-8">
-            Identify foundational math gaps in students entering Grades 5, 6, and 7. Get a personalized analysis of your child's capacity.
+            Take our 15-minute diagnostic to identify hidden foundational math gaps. Get a personalized report and immediate action plan to build unshakeable confidence.
           </p>
           
           <div className="flex flex-wrap items-center gap-4 text-sm font-medium text-white/70">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-brand-green" /> 15 Min Assessment
+              <div className="w-2 h-2 rounded-full bg-brand-green animate-pulse" /> Free Diagnostic
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-brand-coral" /> Instant Report
+              <div className="w-2 h-2 rounded-full bg-brand-coral animate-pulse" /> Instant Report via Email
             </div>
           </div>
         </motion.div>

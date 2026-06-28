@@ -3,8 +3,39 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import confetti from "canvas-confetti";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+
+const playSuccessSound = () => {
+  try {
+    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AudioContext) return;
+    
+    const ctx = new AudioContext();
+    const playNote = (frequency: number, startTime: number, duration: number) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.value = frequency;
+      gain.gain.setValueAtTime(0, startTime);
+      gain.gain.linearRampToValueAtTime(0.1, startTime + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+    };
+    
+    const now = ctx.currentTime;
+    playNote(523.25, now, 0.4);       // C5
+    playNote(659.25, now + 0.1, 0.4); // E5
+    playNote(783.99, now + 0.2, 0.4); // G5
+    playNote(1046.50, now + 0.3, 0.6);// C6
+  } catch (e) {
+    console.error("Audio API not supported or blocked", e);
+  }
+};
 
 export default function ResultsPage() {
   const router = useRouter();
@@ -20,6 +51,18 @@ export default function ResultsPage() {
     }
     setResults(JSON.parse(res));
     setUser(JSON.parse(usr));
+
+    // Trigger celebration effects after a tiny delay for render
+    setTimeout(() => {
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#22208C', '#C96A28', '#7FAE6D', '#B6A6E5'],
+        disableForReducedMotion: true
+      });
+      playSuccessSound();
+    }, 300);
   }, [router]);
 
   if (!results || !user) return null;
@@ -187,7 +230,7 @@ export default function ResultsPage() {
             </Card>
           </motion.div>
 
-          {/* Premium Upsell Placeholder */}
+          {/* Course Enrollment CTA */}
           <motion.div variants={itemVariants} className="print:hidden">
             <Card className="border-2 border-brand-indigo bg-brand-indigo/5 relative overflow-hidden">
               <div className="absolute top-0 right-0 p-4 opacity-10">
@@ -197,22 +240,24 @@ export default function ResultsPage() {
               </div>
               <CardHeader>
                 <div className="inline-block bg-brand-indigo text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 w-max">
-                  Premium Report
+                  Recommended Course
                 </div>
-                <CardTitle className="text-2xl text-brand-indigo">Unlock Deep Insights</CardTitle>
+                <CardTitle className="text-2xl text-brand-indigo">Bridge to Middle School Math</CardTitle>
                 <CardDescription className="text-base text-brand-charcoal/80 max-w-2xl">
-                  Get a comprehensive analysis of {user.studentName}'s mathematical thinking, including the Future Algebra Risk index, Confidence vs Competence mapping, and a Personalized Action Plan.
+                  Turn these diagnostic insights into action! Enroll {user.studentName} in our specialized bootcamp designed to close foundational gaps and build unshakeable math confidence before the school year begins.
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                  {["Future Algebra Risk", "Confidence vs Competence", "Personalized Action Plan", "Recommended Modules"].map((feature) => (
-                    <div key={feature} className="bg-white p-3 rounded-xl border border-brand-indigo/10 text-center text-sm font-semibold text-brand-charcoal">
+                  {["Live Expert Instruction", "Targeted Gap Practice", "Confidence Building", "Weekly Progress Reports"].map((feature) => (
+                    <div key={feature} className="bg-white p-3 rounded-xl border border-brand-indigo/10 text-center text-sm font-semibold text-brand-charcoal flex items-center justify-center">
                       {feature}
                     </div>
                   ))}
                 </div>
-                <Button variant="primary" size="lg">Unlock Premium for $19</Button>
+                <Button variant="primary" size="lg" className="w-full md:w-auto px-10">
+                  Enroll {user.studentName} Now
+                </Button>
               </CardContent>
             </Card>
           </motion.div>

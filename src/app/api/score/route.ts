@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
 import { STUDENT_QUESTIONS } from '@/data/student_questions';
+import { sendReportEmail } from '@/lib/email';
 
 const DOMAIN_QS = {
   "Number Sense": ["S1","S2","S3"],
@@ -96,43 +97,46 @@ export async function POST(request: Request) {
     let dbStatus = "Not attempted";
     let dbError = null;
     
-    if (process.env.NEXT_PUBLIC_SUPABASE_URL && user) {
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_URL !== 'https://placeholder.supabase.co' && user) {
       dbStatus = "Attempting to save...";
+      
+      // Generate UUIDs upfront so we don't need .select() which gets blocked by RLS
+      const parentId = crypto.randomUUID();
+      const studentId = crypto.randomUUID();
+
       // 1. Insert Parent
-      const { data: parentData, error: parentError } = await supabaseAdmin
+      const { error: parentError } = await supabaseAdmin
         .from('parents')
         .insert({
+          id: parentId,
           parent_name: user.parentName,
           email: user.email,
           phone: user.phone
-        })
-        .select()
-        .single();
+        });
 
       if (parentError) {
         console.error("Supabase Parent Insert Error:", parentError);
         dbError = parentError;
-      } else if (parentData) {
+      } else {
         // 2. Insert Student
-        const { data: studentData, error: studentError } = await supabaseAdmin
+        const { error: studentError } = await supabaseAdmin
           .from('students')
           .insert({
-            parent_id: parentData.id,
+            id: studentId,
+            parent_id: parentId,
             student_name: user.studentName,
             grade_level: user.gradeLevel
-          })
-          .select()
-          .single();
+          });
 
         if (studentError) {
           console.error("Supabase Student Insert Error:", studentError);
           dbError = studentError;
-        } else if (studentData) {
+        } else {
           // 3. Insert Assessment Results
           const { error: assessmentError } = await supabaseAdmin
             .from('assessments')
             .insert({
-              student_id: studentData.id,
+              student_id: studentId,
               responses,
               overall_score: reportData.weightedPct,
               foundation_score: reportData.overallScore, // Reusing column for total pct
@@ -152,14 +156,21 @@ export async function POST(request: Request) {
         }
       }
     } else {
-      console.warn("Supabase URL missing or user data missing. Results not saved to DB.");
+      console.warn("Supabase URL missing or set to placeholder. Results not saved to DB.");
       dbStatus = "Missing URL or User Data";
+    }
+
+    // SEND EMAIL TO PARENT
+    let emailStatus = "Not attempted";
+    if (user && user.email) {
+      const emailResult = await sendReportEmail(user, reportData);
+      emailStatus = emailResult.success ? "Sent successfully" : "Failed or skipped";
     }
 
     return NextResponse.json({
       success: true,
       data: reportData,
-      debug: { dbStatus, dbError }
+      debug: { dbStatus, dbError, emailStatus }
     });
 
   } catch (error) {
