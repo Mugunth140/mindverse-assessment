@@ -14,7 +14,7 @@ const schema = z.object({
   email: z.string().email("Valid email is required"),
   phone: z.string().min(10, "Valid phone number is required"),
   studentName: z.string().min(2, "Student name is required"),
-  gradeLevel: z.enum(["5", "6", "7"], { message: "Please select a grade" }),
+  gradeLevel: z.enum(["6", "7"], { message: "Please select a grade" }),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -25,7 +25,7 @@ export default function Home() {
 
   const { register, handleSubmit, formState: { errors }, setValue, watch } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { gradeLevel: "5" }
+    defaultValues: { gradeLevel: "6" }
   });
 
   const selectedGrade = watch("gradeLevel");
@@ -166,11 +166,11 @@ export default function Home() {
             <div className="space-y-1.5">
               <label className="text-[11px] font-bold text-brand-indigo ml-1 uppercase tracking-wider">Entering Grade Level</label>
               <div className="flex bg-brand-ivory/50 border-2 border-brand-indigo/20 rounded-xl p-1 gap-1">
-                {["5", "6", "7"].map((grade) => (
+                {["6", "7"].map((grade) => (
                   <button
                     key={grade}
                     type="button"
-                    onClick={() => setValue("gradeLevel", grade as "5"|"6"|"7")}
+                    onClick={() => setValue("gradeLevel", grade as "6"|"7")}
                     className={`flex-1 py-2 text-sm rounded-lg font-heading font-black transition-all ${
                       selectedGrade === grade 
                         ? "bg-brand-indigo text-white shadow-md" 

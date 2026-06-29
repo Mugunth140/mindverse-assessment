@@ -1,197 +1,936 @@
 {
-  "foundation": [
-    {
-      "id": "F1",
-      "domain": "Fraction & Decimal Understanding",
-      "question": "A student says: '3/8 is greater than 1/2 because 3 is greater than 1.' Which statement best evaluates the student's reasoning?",
-      "correctAnswer": "C",
-      "diagnosticGap": "Fraction comparison reasoning"
-    },
-    {
-      "id": "F2",
-      "domain": "Fraction & Decimal Understanding",
-      "question": "A student claims: '0.6 and 0.60 are different numbers because one has more digits.' Which statement is true?",
-      "correctAnswer": "B",
-      "diagnosticGap": "Decimal place value"
-    },
-    {
-      "id": "F3",
-      "domain": "Fraction & Decimal Understanding",
-      "question": "A recipe uses 3/4 cup of milk. A baker makes half the recipe. Which student has the correct reasoning?",
-      "correctAnswer": "B",
-      "diagnosticGap": "Fraction as quantity"
-    },
-    {
-      "id": "F4",
-      "domain": "Multiplicative Thinking",
-      "question": "A recipe uses flour and sugar in a ratio of 5:2. If the recipe uses 15 cups of flour, how much sugar is needed?",
-      "correctAnswer": "B",
-      "diagnosticGap": "Scaling relationships"
-    },
-    {
-      "id": "F5",
-      "domain": "Multiplicative Thinking",
-      "question": "Two students compare 8/12 and 10/15. Who is correct?",
-      "correctAnswer": "B",
-      "diagnosticGap": "Equivalent ratios"
-    },
-    {
-      "id": "F6",
-      "domain": "Mathematical Reasoning",
-      "question": "A student says: 'Multiplying always makes numbers larger.' Which example disproves the claim?",
-      "correctAnswer": "C",
-      "diagnosticGap": "Conceptual multiplication"
-    },
-    {
-      "id": "F7",
-      "domain": "Mathematical Reasoning",
-      "question": "Every even number is divisible by 4. Which number shows this is false?",
-      "correctAnswer": "C",
-      "diagnosticGap": "Counterexample reasoning"
-    },
-    {
-      "id": "F8",
-      "domain": "Mathematical Reasoning",
-      "question": "Pattern: 4,7,10,13... What is the 20th term?",
-      "correctAnswer": "B",
-      "diagnosticGap": "Generalization"
-    },
-    {
-      "id": "F9",
-      "domain": "Problem Solving & Modeling",
-      "question": "Field trip buses: 126 students, 48 seats per bus. Three buses enough?",
-      "correctAnswer": "B",
-      "diagnosticGap": "Context interpretation"
-    },
-    {
-      "id": "F10",
-      "domain": "Problem Solving & Modeling",
-      "question": "One-third of a full bottle was consumed. Who is correct: two-thirds remains or one-half remains?",
-      "correctAnswer": "A",
-      "diagnosticGap": "Fraction interpretation"
-    },
-    {
-      "id": "F11",
-      "domain": "Problem Solving & Modeling",
-      "question": "A jacket costs $80 with 25% off. Which statement must be true?",
-      "correctAnswer": "B",
-      "diagnosticGap": "Percent reasoning"
-    },
-    {
-      "id": "F12",
-      "domain": "Fraction & Decimal Understanding",
-      "question": "If fractions have the same denominator, what should be compared?",
-      "correctAnswer": "A",
-      "diagnosticGap": "Fraction structure"
-    },
-    {
-      "id": "F13",
-      "domain": "Mathematical Reasoning",
-      "question": "A student solves 24 \u00f7 6 = 8. What best explains the error?",
-      "correctAnswer": "B",
-      "diagnosticGap": "Operation sense"
-    },
-    {
-      "id": "F14",
-      "domain": "Estimation & Precision",
-      "question": "A student estimates 198\u00d749 by calculating 200\u00d750. Which statement is true?",
-      "correctAnswer": "B",
-      "diagnosticGap": "Estimation"
-    },
-    {
-      "id": "F15",
-      "domain": "Estimation & Precision",
-      "question": "A student claims 17\u00d78=1360. What is the strongest reason it is unreasonable?",
-      "correctAnswer": "A",
-      "diagnosticGap": "Magnitude reasoning"
-    }
-  ],
-  "grade5": [
-    {
-      "id": "G5-1",
-      "correctAnswer": "B"
-    },
-    {
-      "id": "G5-2",
-      "correctAnswer": "B"
-    },
-    {
-      "id": "G5-3",
-      "correctAnswer": "B"
-    },
-    {
-      "id": "G5-4",
-      "correctAnswer": "B"
-    },
-    {
-      "id": "G5-5",
-      "correctAnswer": "B"
-    }
-  ],
   "grade6": [
     {
       "id": "G6-1",
-      "correctAnswer": "B"
+      "domain": "Geometry & Measurement",
+      "q": "A recipe calls for 4 cups of juice concentrate for every 11 cups of water. Which mixture keeps the same ratio?",
+      "choices": [
+        "8 cups concentrate and 20 cups water",
+        "12 cups concentrate and 33 cups water",
+        "10 cups concentrate and 28 cups water",
+        "14 cups concentrate and 39 cups water"
+      ],
+      "ans": 1
     },
     {
       "id": "G6-2",
-      "correctAnswer": "A"
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "A map scale is 1 cm : 8 km. A road measures 7.5 cm. What distance does it represent?",
+      "choices": [
+        "56 km",
+        "60 km",
+        "64 km",
+        "68 km"
+      ],
+      "ans": 1
     },
     {
       "id": "G6-3",
-      "correctAnswer": "A"
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "Which number is exactly halfway between 0.48 and 3/5?",
+      "choices": [
+        "0.53",
+        "0.54",
+        "0.55",
+        "0.56"
+      ],
+      "ans": 1
     },
     {
       "id": "G6-4",
-      "correctAnswer": "A"
+      "domain": "Geometry & Measurement",
+      "q": "A rectangular prism measures 12 cm \u00d7 8 cm \u00d7 6 cm. Paint covers every outside face except the bottom. How many square centimeters are painted?",
+      "choices": [
+        "432",
+        "336",
+        "240",
+        "144"
+      ],
+      "ans": 1
     },
     {
       "id": "G6-5",
-      "correctAnswer": "A"
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "A store marks an item 20% off, then increases the sale price by 20%. Compared to the original price, the final price is:",
+      "choices": [
+        "the same.",
+        "4% less.",
+        "4% greater.",
+        "20% less."
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G6-6",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "A prism has dimensions 15 cm \u00d7 8 cm \u00d7 5 cm. The length increases by 20%. What is the new volume?",
+      "choices": [
+        "600 cm\u00b3",
+        "660 cm\u00b3",
+        "720 cm\u00b3",
+        "750 cm\u00b3"
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G6-7",
+      "domain": "Geometry & Measurement",
+      "q": "A dot plot contains: 3 dots at 4, 5 dots at 7, 2 dots at 10. Which statement is true?",
+      "choices": [
+        "Mean = 7",
+        "Median = 7",
+        "Range = 5",
+        "Both A and B"
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G6-8",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "When x = 0.5, which expression has the greatest value?",
+      "choices": [
+        "4x + 3",
+        "2x + 5",
+        "6 \u2212 x",
+        "3x + 4"
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G6-9",
+      "domain": "Geometry & Measurement",
+      "q": "Four students each shook hands with every other student exactly once. How many handshakes occurred?",
+      "choices": [
+        "4",
+        "5",
+        "6",
+        "8"
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G6-10",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "A cube is cut exactly in half parallel to one face. Compared with the original cube, the total surface area of the two new solids is:",
+      "choices": [
+        "Smaller",
+        "The same",
+        "Greater",
+        "Impossible to determine"
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G6-11",
+      "domain": "Geometry & Measurement",
+      "q": "A box contains only red, blue, and green marbles. There are more red marbles than blue marbles. There are fewer green marbles than blue marbles. Which statement must be true?",
+      "choices": [
+        "Green marbles are the most.",
+        "Blue marbles are the fewest.",
+        "Red marbles are the most.",
+        "Blue marbles are the most."
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G6-12",
+      "domain": "Geometry & Measurement",
+      "q": "Which expression is always odd when n is a whole number?",
+      "choices": [
+        "2n",
+        "2n + 1",
+        "4n",
+        "6n"
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G6-13",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "A cube has edge length 8 cm; another cube has edge length 4 cm. The larger cube's volume is how many times greater?",
+      "choices": [
+        "2",
+        "4",
+        "8",
+        "16"
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G6-14",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "Riya says, \u201cIf you multiply any number by 0.5, the answer is always smaller.\u201d Which example proves her statement is not always true?",
+      "choices": [
+        "8 \u00d7 0.5 = 4",
+        "0 \u00d7 0.5 = 0",
+        "12 \u00d7 0.5 = 6",
+        "20 \u00d7 0.5 = 10"
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G6-15",
+      "domain": "Number Sense & Operations",
+      "q": "Which pair of ratios is NOT equivalent?",
+      "choices": [
+        "16:24 and 2:3",
+        "35:50 and 7:10",
+        "24:30 and 8:9",
+        "42:56 and 3:4"
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G6-16",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "A student multiplies 0.06 \u00d7 0.5 and gets 0.30. Which misconception most likely caused the error?",
+      "choices": [
+        "The student ignored decimal place value.",
+        "The student multiplied incorrectly.",
+        "The student divided instead of multiplied.",
+        "The student added instead of multiplied."
+      ],
+      "ans": 0
+    },
+    {
+      "id": "G6-17",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "A data set contains: 5, 7, 10, 14. Another number is added. The new median is 9, and the range does not change. Which number was added?",
+      "choices": [
+        "6",
+        "8",
+        "9",
+        "11"
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G6-18",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "A cube has edge length 10 cm. If 1 cm is shaved from every edge, the new volume decreases by:",
+      "choices": [
+        "190 cm\u00b3",
+        "271 cm\u00b3",
+        "300 cm\u00b3",
+        "729 cm\u00b3"
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G6-19",
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "A student records temperatures: 20, 22, 22, 23, 23, 24, 40. Which statement is correct?",
+      "choices": [
+        "Mean is less than median.",
+        "Mean equals median.",
+        "Mean is greater than median.",
+        "Range equals mean."
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G6-20",
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "A classroom has 18 boys and 24 girls. Which statement is true?",
+      "choices": [
+        "The ratio of boys to girls is 3:4.",
+        "The ratio of boys to total students is 4:7.",
+        "The ratio of girls to boys is 2:3.",
+        "The ratio of girls to total students is 3:5."
+      ],
+      "ans": 0
+    },
+    {
+      "id": "G6-21",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "The numbers below are arranged in increasing order: 9, 12, 15, 18, 20, x, 31. If the median is 18 and the mean is 18, what is x?",
+      "choices": [
+        "20",
+        "21",
+        "22",
+        "23"
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G6-22",
+      "domain": "Number Sense & Operations",
+      "q": "A data set has a range of 26. If the smallest value is doubled while the largest value stays the same, the new range becomes 20. What was the smallest value?",
+      "choices": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G6-23",
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "A recipe uses 5 cups of flour for every 8 cups of sugar. A student says that a mixture containing 15 cups of flour and 18 cups of sugar follows the same ratio because both quantities increased. What is the student's mistake?",
+      "choices": [
+        "They should compare the difference between the numbers.",
+        "They used additive reasoning instead of multiplicative reasoning.",
+        "They multiplied the flour by too much.",
+        "They should have divided both numbers by 2."
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G6-24",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "Which equation is true?",
+      "choices": [
+        "7.2 \u00f7 0.09 = 8",
+        "0.72 \u00f7 0.09 = 80",
+        "72 \u00f7 0.9 = 80",
+        "7.2 \u00f7 9 = 8"
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G6-25",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "Two prisms have equal surface area. Which statement must be true?",
+      "choices": [
+        "They have equal volume.",
+        "They contain the same amount of space.",
+        "Their volumes may be different.",
+        "They are the same shape."
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G6-26",
+      "domain": "Number Sense & Operations",
+      "q": "Which expression is equivalent to 9 \u2212 (2x \u2212 3)?",
+      "choices": [
+        "12 \u2212 2x",
+        "6 \u2212 2x",
+        "9 \u2212 2x \u2212 3",
+        "2x + 12"
+      ],
+      "ans": 0
+    },
+    {
+      "id": "G6-27",
+      "domain": "Number Sense & Operations",
+      "q": "Which argument is correct?",
+      "choices": [
+        "Every rectangle is a square.",
+        "Every square is a rectangle.",
+        "Every parallelogram is a square.",
+        "Every rhombus is a rectangle."
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G6-28",
+      "domain": "Number Sense & Operations",
+      "q": "A pattern begins 5, 9, 13, 17, ... Which expression gives the n-th term?",
+      "choices": [
+        "4n + 1",
+        "5n \u2212 1",
+        "4n + 5",
+        "5n + 4"
+      ],
+      "ans": 0
+    },
+    {
+      "id": "G6-29",
+      "domain": "Number Sense & Operations",
+      "q": "A student claims 2(x + 5) = 2x + 5. What misconception is shown?",
+      "choices": [
+        "The student distributed only to the variable.",
+        "The student multiplied incorrectly.",
+        "The student added before multiplying.",
+        "The student combined unlike terms."
+      ],
+      "ans": 0
+    },
+    {
+      "id": "G6-30",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "A student writes 4a + 3b = 7ab. Which misconception is shown?",
+      "choices": [
+        "The student combined unlike terms.",
+        "The student multiplied incorrectly.",
+        "The student evaluated first.",
+        "The student distributed incorrectly."
+      ],
+      "ans": 0
     }
   ],
   "grade7": [
     {
       "id": "G7-1",
-      "correctAnswer": "C"
+      "domain": "Geometry & Measurement",
+      "q": "B",
+      "choices": [],
+      "ans": -1
     },
     {
       "id": "G7-2",
-      "correctAnswer": "A"
+      "domain": "Number Sense & Operations",
+      "q": "Which product is less than 1 2 ?",
+      "choices": [
+        "3 4 \u00d7 3 4",
+        "2 3 \u00d7 4 5",
+        "3 5 \u00d7 2 3",
+        "5 6 \u00d7 4 5"
+      ],
+      "ans": 2
     },
     {
       "id": "G7-3",
-      "correctAnswer": "A"
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "Which product is odd?",
+      "choices": [
+        "246 \u00d7 54",
+        "391 \u00d7 28",
+        "315 \u00d7 44",
+        "127 \u00d7 315"
+      ],
+      "ans": 3
     },
     {
       "id": "G7-4",
-      "correctAnswer": "A"
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "A",
+      "choices": [],
+      "ans": -1
     },
     {
       "id": "G7-5",
-      "correctAnswer": "B"
-    }
-  ],
-  "challenge": [
-    {
-      "id": "C1",
-      "correctAnswer": "B"
+      "domain": "Number Sense & Operations",
+      "q": "A",
+      "choices": [],
+      "ans": -1
     },
     {
-      "id": "C2",
-      "correctAnswer": "C"
+      "id": "G7-6",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "Which number has more factors than 36?",
+      "choices": [
+        "32",
+        "48",
+        "49",
+        "53"
+      ],
+      "ans": 1
     },
     {
-      "id": "C3",
-      "correctAnswer": "A"
+      "id": "G7-7",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "A",
+      "choices": [],
+      "ans": -1
     },
     {
-      "id": "C4",
-      "correctAnswer": "A"
+      "id": "G7-8",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "C",
+      "choices": [],
+      "ans": -1
     },
     {
-      "id": "C5",
-      "correctAnswer": "B"
+      "id": "G7-9",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "A number is greater than 489,999 but less than 490,010. Which number satisfies the condition?",
+      "choices": [
+        "489,998",
+        "490,010",
+        "490,005",
+        "490,100 Mathematics Assessment Page 1 of 6"
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G7-10",
+      "domain": "Geometry & Measurement",
+      "q": "B",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-11",
+      "domain": "Number Sense & Operations",
+      "q": "C",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-12",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "Which shape statement is false?",
+      "choices": [
+        "Every square has four equal sides.",
+        "Every rectangle has four right angles.",
+        "Every parallelogram has four equal sides.",
+        "Every square is a parallelogram."
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G7-13",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "A",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-14",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "C",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-15",
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "B",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-16",
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "Which statement about 4,368 \u00f7 21 is true?",
+      "choices": [
+        "The quotient is greater than 300.",
+        "The quotient is between 200 and 210.",
+        "The quotient is less than 150.",
+        "The quotient is exactly 210."
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G7-17",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "A",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-18",
+      "domain": "Geometry & Measurement",
+      "q": "A",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-19",
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "A recipe uses 3 4 cup of flour. Mia doubles the recipe and then uses only half of the doubled amount. How much flour does she actually use?",
+      "choices": [
+        "3 2",
+        "3 4",
+        "3 8",
+        "3 5"
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G7-20",
+      "domain": "Geometry & Measurement",
+      "q": "A baker has 5 kilograms of dough. Each loaf requires 5 8 kilogram. How many whole loaves can the baker make?",
+      "choices": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G7-21",
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "A farmer planted trees in 127 rows. Each row contains 315 trees. He plans to divide the total number equally between 2 parks. Which statement is true?",
+      "choices": [
+        "The trees can be divided equally because the product is even.",
+        "The trees cannot be divided equally because the product is odd.",
+        "The total is a multiple of 10.",
+        "The total ends in 0. Mathematics Assessment Page 5 of 6 Answer Key Quick Reference"
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G7-22",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "Which number rounds to 700 when rounded to the nearest hundred and to 750 when rounded to the nearest ten?",
+      "choices": [
+        "746",
+        "739",
+        "751",
+        "744"
+      ],
+      "ans": 0
+    },
+    {
+      "id": "G7-23",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "How many numbers between 1 and 30 are both factors of 60 and multiples of 3?",
+      "choices": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G7-24",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "Which number is closest to 9?",
+      "choices": [
+        "8.991",
+        "9.009",
+        "8.999",
+        "9.011 Mathematics Assessment Page 3 of 6"
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G7-25",
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "B",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-26",
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "How many times greater is the value of the digit 4 in 4.281 than in 0.4281?",
+      "choices": [
+        "10",
+        "100",
+        "1000",
+        "10000"
+      ],
+      "ans": 0
+    },
+    {
+      "id": "G7-27",
+      "domain": "Number Sense & Operations",
+      "q": "A",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-28",
+      "domain": "Geometry & Measurement",
+      "q": "A",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-29",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "Which list is ordered from greatest to least?",
+      "choices": [
+        "0.909, 0.91, 0.9009, 0.9",
+        "0.91, 0.909, 0.9009, 0.9",
+        "0.909, 0.9009, 0.91, 0.9",
+        "0.91, 0.9009, 0.909, 0.9"
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G7-30",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "D",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-31",
+      "domain": "Number Sense & Operations",
+      "q": "C",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-32",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "A square has a perimeter of 48 cm. What is its area?",
+      "choices": [
+        "96 cm\u00b2",
+        "144 cm\u00b2",
+        "120 cm\u00b2",
+        "192 cm\u00b2"
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G7-33",
+      "domain": "Number Sense & Operations",
+      "q": "C",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-34",
+      "domain": "Geometry & Measurement",
+      "q": "Which pair has the least common multiple (LCM) equal to 84?",
+      "choices": [
+        "12 and 14",
+        "6 and 12",
+        "14 and 28",
+        "7 and 42"
+      ],
+      "ans": 0
+    },
+    {
+      "id": "G7-35",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "There are 48 apples and 72 oranges. A teacher wants to pack them into identical gift bags. What is the greatest number of gift bags she can make?",
+      "choices": [
+        "8",
+        "12",
+        "16",
+        "24"
+      ],
+      "ans": 3
+    },
+    {
+      "id": "G7-36",
+      "domain": "Number Sense & Operations",
+      "q": "Two school bells ring together at 8:00 AM. Bell A rings every 12 minutes. Bell B rings every 14 minutes. When will they ring together again?",
+      "choices": [
+        "9:00 AM",
+        "9:12 AM",
+        "9:24 AM",
+        "9:36 AM"
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G7-37",
+      "domain": "Number Sense & Operations",
+      "q": "Which expression is equal to 3,196 \u00f7 8?",
+      "choices": [
+        "400",
+        "399 remainder 4",
+        "399 remainder 8",
+        "398 remainder 12"
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G7-38",
+      "domain": "Geometry & Measurement",
+      "q": "Which equation must be true?",
+      "choices": [
+        "256 \u00d7 18 = (256 \u00d7 20) + (256 \u00d7 2)",
+        "256 \u00d7 18 = (256 \u00d7 20) \u2212 (256 \u00d7 2)",
+        "256 \u00d7 18 = 256 + 18",
+        "256 \u00d7 18 = 256 \u00d7 8"
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G7-39",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "Which number is closest to 500,000?",
+      "choices": [
+        "499,501",
+        "500,901",
+        "498,999",
+        "501,201"
+      ],
+      "ans": 0
+    },
+    {
+      "id": "G7-40",
+      "domain": "Number Sense & Operations",
+      "q": "From the given diagram below:",
+      "choices": [
+        "6\u00bc",
+        "7",
+        "7\u00bd",
+        "8\u00bc"
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G7-41",
+      "domain": "Geometry & Measurement",
+      "q": "B",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-42",
+      "domain": "Geometry & Measurement",
+      "q": "A warehouse packs toys into cartons holding 36 toys each. After packing all the full cartons, 19 toys remain. There are 425 full cartons. How many toys were in the shipment?",
+      "choices": [
+        "15,281",
+        "15,319",
+        "15,300",
+        "15,325"
+      ],
+      "ans": 1
+    },
+    {
+      "id": "G7-43",
+      "domain": "Geometry & Measurement",
+      "q": "B",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-44",
+      "domain": "Geometry & Measurement",
+      "q": "Maya paints 5 8 , Leo paints 7 12 , and Sam paints 3 4 of equal-sized sections. Who painted the most?",
+      "choices": [
+        "Maya",
+        "Leo",
+        "Sam",
+        "They painted the same amount."
+      ],
+      "ans": 2
+    },
+    {
+      "id": "G7-45",
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "Which number makes the equation true? \u00a0 \u00a0 \u25a1 \u00d7 48 = 14,400",
+      "choices": [
+        "300",
+        "320",
+        "280",
+        "340"
+      ],
+      "ans": 0
+    },
+    {
+      "id": "G7-46",
+      "domain": "Number Sense & Operations",
+      "q": "Two rectangles each have an area of 36 cm\u00b2. Rectangle P measures 4cm \u00d7 9cm. Rectangle Q measures 6cm \u00d7 6cm. Which statement is true?",
+      "choices": [
+        "Rectangle P has the greater perimeter.",
+        "Rectangle Q has the greater perimeter.",
+        "Both have the same perimeter.",
+        "They do not have the same area. Mathematics Assessment Page 2 of 6"
+      ],
+      "ans": 0
+    },
+    {
+      "id": "G7-47",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "B",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-48",
+      "domain": "Number Sense & Operations",
+      "q": "A quotient is 245 with a remainder of 17. The divisor is 36. What was the dividend?",
+      "choices": [
+        "8,837",
+        "8,820",
+        "8,873",
+        "8,845"
+      ],
+      "ans": 0
+    },
+    {
+      "id": "G7-49",
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "A teacher has 9 meters of ribbon. She cuts pieces that are 3 4 meter long and gives away 2 pieces. How many meters remain?",
+      "choices": [
+        "7\u00bd",
+        "6",
+        "5\u00bd",
+        "4\u00bd"
+      ],
+      "ans": 0
+    },
+    {
+      "id": "G7-50",
+      "domain": "Number Sense & Operations",
+      "q": "D",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-51",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "C",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-52",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "D",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-53",
+      "domain": "Geometry & Measurement",
+      "q": "A student says, \"In 9.307, the digit 3 is worth 3 hundredths.\" What is the student's mistake?",
+      "choices": [
+        "The 3 is in the tenths place.",
+        "The 3 is in the thousandths place.",
+        "The 3 is in the ones place.",
+        "The 3 has no value."
+      ],
+      "ans": 0
+    },
+    {
+      "id": "G7-54",
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "B",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-55",
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "C",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-56",
+      "domain": "Data, Ratios & Problem Solving",
+      "q": "B Mathematics Assessment Page 6 of 6",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-57",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "A",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-58",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "A rectangle has a perimeter of 30 cm. Which dimensions give the greatest area?",
+      "choices": [
+        "1 \u00d7 14",
+        "3 \u00d7 12",
+        "5 \u00d7 10",
+        "7 \u00d7 8 Mathematics Assessment Page 4 of 6"
+      ],
+      "ans": 3
+    },
+    {
+      "id": "G7-59",
+      "domain": "Algebraic Thinking & Patterns",
+      "q": "B",
+      "choices": [],
+      "ans": -1
+    },
+    {
+      "id": "G7-60",
+      "domain": "Fractions, Decimals & Percentages",
+      "q": "B",
+      "choices": [],
+      "ans": -1
     }
   ]
 }

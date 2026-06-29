@@ -8,9 +8,19 @@ import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { PARENT_QUESTIONS } from "@/data/parent_questions";
-import { STUDENT_QUESTIONS } from "@/data/student_questions";
+import questionBank from "@/data/question_bank.json";
 
 type Section = "PARENT" | "TRANSITION" | "STUDENT";
+
+// Helper to shuffle array
+function shuffleArray<T>(array: T[]): T[] {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 
 export default function AssessmentPage() {
   const router = useRouter();
@@ -21,22 +31,45 @@ export default function AssessmentPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [responses, setResponses] = useState<Record<string, string | number>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const [studentQuestions, setStudentQuestions] = useState<any[]>([]);
 
   // Load state on mount
   useEffect(() => {
-    const user = localStorage.getItem("mindverse_user");
-    if (!user) {
+    const userStr = localStorage.getItem("mindverse_user");
+    if (!userStr) {
       router.push("/");
       return;
     }
-    setUserData(JSON.parse(user));
+    const user = JSON.parse(userStr);
+    setUserData(user);
     
+    // Initialize & shuffle questions for this specific user
+    const gradeKey = `grade${user.gradeLevel}` as keyof typeof questionBank;
+    let questionsRaw = (questionBank as any)[gradeKey] || [];
+    
+    // Shuffle questions and their choices
+    let shuffled = shuffleArray(questionsRaw).map((q: any) => {
+      // Create an array of choice objects so we can track the correct answer's new position
+      const choicesWithOriginalIndex = q.choices.map((c: string, i: number) => ({ text: c, isCorrect: i === q.ans }));
+      const shuffledChoices = shuffleArray<{text: string, isCorrect: boolean}>(choicesWithOriginalIndex);
+      const newAnsIndex = shuffledChoices.findIndex(c => c.isCorrect);
+      return {
+        ...q,
+        choices: shuffledChoices.map(c => c.text),
+        ans: newAnsIndex
+      };
+    });
+    
+    setStudentQuestions(shuffled);
+
     const savedProgress = localStorage.getItem("mindverse_assessment_progress");
     if (savedProgress) {
       const parsed = JSON.parse(savedProgress);
       setCurrentSection(parsed.currentSection);
       setCurrentIndex(parsed.currentIndex);
       setResponses(parsed.responses);
+      if (parsed.shuffledQuestions) setStudentQuestions(parsed.shuffledQuestions);
     }
     
     setIsLoaded(true);
@@ -44,18 +77,19 @@ export default function AssessmentPage() {
 
   // Autosave
   useEffect(() => {
-    if (isLoaded) {
+    if (isLoaded && studentQuestions.length > 0) {
       localStorage.setItem("mindverse_assessment_progress", JSON.stringify({
         currentSection,
         currentIndex,
-        responses
+        responses,
+        shuffledQuestions: studentQuestions
       }));
     }
-  }, [currentSection, currentIndex, responses, isLoaded]);
+  }, [currentSection, currentIndex, responses, isLoaded, studentQuestions]);
 
-  if (!isLoaded || !userData) return null;
+  if (!isLoaded || !userData || studentQuestions.length === 0) return null;
 
-  const totalQuestions = PARENT_QUESTIONS.length + STUDENT_QUESTIONS.length;
+  const totalQuestions = PARENT_QUESTIONS.length + studentQuestions.length;
 
   const getProgress = () => {
     if (currentSection === "TRANSITION") return (PARENT_QUESTIONS.length / totalQuestions) * 100;
@@ -68,7 +102,7 @@ export default function AssessmentPage() {
   };
 
   const handleAnswer = (answer: string | number) => {
-    const qId = currentSection === "PARENT" ? PARENT_QUESTIONS[currentIndex].id : STUDENT_QUESTIONS[currentIndex].id;
+    const qId = currentSection === "PARENT" ? PARENT_QUESTIONS[currentIndex].id : studentQuestions[currentIndex].id;
     setResponses(prev => ({ ...prev, [qId]: answer }));
   };
 
@@ -83,7 +117,7 @@ export default function AssessmentPage() {
       setCurrentSection("STUDENT");
       setCurrentIndex(0);
     } else if (currentSection === "STUDENT") {
-      if (currentIndex < STUDENT_QUESTIONS.length - 1) {
+      if (currentIndex < studentQuestions.length - 1) {
         setCurrentIndex(prev => prev + 1);
       } else {
         await submitAssessment();
@@ -116,7 +150,8 @@ export default function AssessmentPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           user: userData,
-          responses
+          responses,
+          shuffledQuestions: studentQuestions
         })
       });
       const data = await res.json();
@@ -134,7 +169,7 @@ export default function AssessmentPage() {
     }
   };
 
-  const currentQId = currentSection === "PARENT" ? PARENT_QUESTIONS[currentIndex]?.id : STUDENT_QUESTIONS[currentIndex]?.id;
+  const currentQId = currentSection === "PARENT" ? PARENT_QUESTIONS[currentIndex]?.id : studentQuestions[currentIndex]?.id;
   const currentAnswer = responses[currentQId] ?? null;
 
   return (
@@ -169,13 +204,11 @@ export default function AssessmentPage() {
               className="text-center w-full max-w-md mx-auto mt-4"
             >
               <div className="bg-white rounded-3xl p-8 md:p-12 shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-brand-charcoal/5 flex flex-col items-center">
-                <motion.div 
+                <div 
                   className="w-16 h-16 bg-brand-green/10 rounded-2xl flex items-center justify-center text-brand-green mb-6"
-                  animate={{ rotate: [0, 10, -10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <Sparkles className="w-8 h-8" />
-                </motion.div>
+                </div>
                 
                 <h2 className="text-2xl md:text-3xl font-heading font-bold text-brand-charcoal mb-3 tracking-tight">
                   Thank You!
@@ -191,7 +224,7 @@ export default function AssessmentPage() {
                   onClick={handleNext}
                   className="w-full h-14 text-base rounded-xl shadow-md shadow-brand-indigo/10 group flex items-center justify-center gap-2"
                 >
-                  I am {userData.studentName}, let's go!
+                 let&apos;s go!
                 </Button>
               </div>
             </motion.div>
@@ -207,11 +240,11 @@ export default function AssessmentPage() {
               <Card className="border-none shadow-lg shadow-brand-indigo/5">
                 <CardContent className="p-6 md:p-8">
                   <div className="text-xs font-bold tracking-widest text-brand-charcoal/40 uppercase mb-3">
-                    {currentSection === "PARENT" ? PARENT_QUESTIONS[currentIndex].section : STUDENT_QUESTIONS[currentIndex].domain}
+                    {currentSection === "PARENT" ? PARENT_QUESTIONS[currentIndex].section : studentQuestions[currentIndex].domain}
                   </div>
                   
                   <h2 className="text-xl md:text-2xl font-heading font-semibold text-brand-charcoal mb-6 leading-relaxed">
-                    {currentSection === "PARENT" ? PARENT_QUESTIONS[currentIndex].text : STUDENT_QUESTIONS[currentIndex].q}
+                    {currentSection === "PARENT" ? PARENT_QUESTIONS[currentIndex].text : studentQuestions[currentIndex].q}
                   </h2>
 
                   {currentSection === "PARENT" ? (
@@ -244,7 +277,7 @@ export default function AssessmentPage() {
                     </div>
                   ) : (
                     <div className="grid gap-2">
-                      {STUDENT_QUESTIONS[currentIndex].choices.map((opt, idx) => {
+                      {studentQuestions[currentIndex].choices.map((opt: string, idx: number) => {
                         const isSelected = currentAnswer === idx;
                         return (
                           <button
@@ -256,7 +289,7 @@ export default function AssessmentPage() {
                               : "border-brand-charcoal/10 hover:border-brand-indigo/30 hover:bg-brand-indigo/5"
                             }`}
                           >
-                            <div className={`w-8 h-8 flex-shrink-0 rounded-full flex items-center justify-center font-bold mr-3 transition-colors ${
+                            <div className={`w-8 h-8 shrink-0 rounded-full flex items-center justify-center font-bold mr-3 transition-colors ${
                               isSelected ? "bg-brand-indigo text-white" : "bg-brand-charcoal/10 text-brand-charcoal"
                             }`}>
                               {["A", "B", "C", "D"][idx]}
@@ -294,7 +327,7 @@ export default function AssessmentPage() {
               isLoading={isSubmitting}
               className="px-8"
             >
-              {currentSection === "STUDENT" && currentIndex === STUDENT_QUESTIONS.length - 1 ? "Submit Assessment" : "Next"}
+              {currentSection === "STUDENT" && currentIndex === studentQuestions.length - 1 ? "Submit Assessment" : "Next"}
             </Button>
           </div>
         </div>

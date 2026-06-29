@@ -1,45 +1,37 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
-import { STUDENT_QUESTIONS } from '@/data/student_questions';
 import { sendReportEmail } from '@/lib/email';
-
-const DOMAIN_QS = {
-  "Number Sense": ["S1","S2","S3"],
-  "Operations": ["S4","S5","S6"],
-  "Fractions": ["S7","S8","S9","S10","S11"],
-  "Decimals": ["S12","S13","S14"],
-  "Percentages": ["S15","S16"],
-  "Ratios": ["S17","S18"],
-  "Patterns": ["S19","S20","S21"],
-  "Variables": ["S22","S23","S24"],
-  "Reasoning": ["S25","S26"],
-  "Problem Solving": ["S27","S28"],
-  "Mental Math": ["S29","S30"],
-};
 
 const LEVEL_LABELS = ["", "Foundation to Strengthen", "Developing", "Approaching Readiness", "Ready", "Highly Ready"];
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { user, responses } = body;
+    const { user, responses, shuffledQuestions } = body;
 
     const domainScores: Record<string, { correct: number, total: number }> = {};
-    for (const [domain, qIds] of Object.entries(DOMAIN_QS)) {
-      let correct = 0;
-      for (const id of qIds) {
-        const q = STUDENT_QUESTIONS.find(x => x.id === id);
-        if (q && responses[id] === q.ans) correct++;
+    
+    // Dynamically calculate based on the exact questions asked
+    if (shuffledQuestions && shuffledQuestions.length > 0) {
+      for (const q of shuffledQuestions) {
+        const domain = q.domain || "Uncategorized";
+        if (!domainScores[domain]) {
+          domainScores[domain] = { correct: 0, total: 0 };
+        }
+        domainScores[domain].total++;
+        if (responses[q.id] === q.ans) {
+          domainScores[domain].correct++;
+        }
       }
-      domainScores[domain] = { correct, total: qIds.length };
     }
 
     const totalCorrect = Object.values(domainScores).reduce((s, d) => s + d.correct, 0);
-    const pct = Math.round((totalCorrect / 30) * 100);
+    const totalQuestions = Object.values(domainScores).reduce((s, d) => s + d.total, 0);
+    const pct = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
 
     // Weighted score — critical domains get 1.5x
-    const critical = ["Fractions","Operations","Variables"];
-    const high = ["Number Sense","Ratios","Patterns","Problem Solving"];
+    const critical = ["Number Sense & Operations", "Fractions, Decimals & Percentages", "Algebraic Thinking & Patterns"];
+    const high = ["Geometry & Measurement", "Data, Ratios & Problem Solving"];
     let weightedSum = 0; let weightedMax = 0;
     
     for (const [domain, score] of Object.entries(domainScores)) {
@@ -47,12 +39,13 @@ export async function POST(request: Request) {
       weightedSum += score.correct * w;
       weightedMax += score.total * w;
     }
-    const weightedPct = Math.round((weightedSum / weightedMax) * 100);
+    const weightedPct = weightedMax > 0 ? Math.round((weightedSum / weightedMax) * 100) : 0;
 
     // Critical gaps
     const gaps: {domain: string, level: string}[] = [];
     const strengths: string[] = [];
     for (const [domain, score] of Object.entries(domainScores)) {
+      if (score.total === 0) continue;
       const ratio = score.correct / score.total;
       if (ratio >= 0.8) strengths.push(domain);
       
@@ -66,7 +59,7 @@ export async function POST(request: Request) {
 
     // Readiness level
     const criticalGaps = gaps.filter(g => g.level === "critical").length;
-    let level;
+    let level = 1;
     if (weightedPct <= 40 || criticalGaps >= 3) level = 1;
     else if (weightedPct <= 55 || criticalGaps >= 2) level = 2;
     else if (weightedPct <= 70) level = 3;
@@ -82,7 +75,7 @@ export async function POST(request: Request) {
     const reportData = {
       overallScore: pct,
       weightedPct,
-      readinessLevel: LEVEL_LABELS[level],
+      readinessLevel: LEVEL_LABELS[level] || "Analysis Pending",
       topStrengths,
       topGrowthAreas,
       totalCorrect,
@@ -100,11 +93,9 @@ export async function POST(request: Request) {
     if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_URL !== 'https://placeholder.supabase.co' && user) {
       dbStatus = "Attempting to save...";
       
-      // Generate UUIDs upfront so we don't need .select() which gets blocked by RLS
       const parentId = crypto.randomUUID();
       const studentId = crypto.randomUUID();
 
-      // 1. Insert Parent
       const { error: parentError } = await supabaseAdmin
         .from('parents')
         .insert({
@@ -118,7 +109,6 @@ export async function POST(request: Request) {
         console.error("Supabase Parent Insert Error:", parentError);
         dbError = parentError;
       } else {
-        // 2. Insert Student
         const { error: studentError } = await supabaseAdmin
           .from('students')
           .insert({
@@ -132,15 +122,14 @@ export async function POST(request: Request) {
           console.error("Supabase Student Insert Error:", studentError);
           dbError = studentError;
         } else {
-          // 3. Insert Assessment Results
           const { error: assessmentError } = await supabaseAdmin
             .from('assessments')
             .insert({
               student_id: studentId,
               responses,
               overall_score: reportData.weightedPct,
-              foundation_score: reportData.overallScore, // Reusing column for total pct
-              grade_score: reportData.totalCorrect,      // Reusing column for total correct
+              foundation_score: reportData.overallScore, 
+              grade_score: reportData.totalCorrect,      
               readiness_level: reportData.readinessLevel,
               challenge_result: `Habits: ${habits}, Confidence: ${confidence}`,
               top_strengths: reportData.topStrengths,
