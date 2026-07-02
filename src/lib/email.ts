@@ -11,12 +11,12 @@ export async function sendReportEmail(user: any, reportData: any) {
 
   const htmlContent = `
     <div style="font-family: sans-serif; max-w: 600px; margin: 0 auto; color: #2F2F2F;">
-      <h1 style="color: #22208C;">Mindverse Learning</h1>
+      <h1 style="color: #2B3A55;">Mindverse Learning</h1>
       <h2>Diagnostic Report for ${user.studentName}</h2>
       
       <div style="background-color: #FAF8F4; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-        <h3 style="margin-top: 0; color: #22208C;">Overall Diagnostic Score: <span style="font-size: 24px;">${reportData.weightedPct}%</span></h3>
-        <p><strong>Readiness Level:</strong> <span style="color: #C96A28;">${reportData.readinessLevel}</span></p>
+        <h3 style="margin-top: 0; color: #2B3A55;">Overall Diagnostic Score: <span style="font-size: 24px;">${reportData.weightedPct}%</span></h3>
+        <p><strong>Readiness Level:</strong> <span style="color: #FF6B6B;">${reportData.readinessLevel}</span></p>
       </div>
 
       <div style="margin-bottom: 20px;">
@@ -29,7 +29,7 @@ export async function sendReportEmail(user: any, reportData: any) {
       </div>
 
       <div style="margin-bottom: 20px;">
-        <h3 style="color: #C96A28;">Priority Growth Areas</h3>
+        <h3 style="color: #FF6B6B;">Priority Growth Areas</h3>
         <ul>
           ${reportData.topGrowthAreas.length > 0 
             ? reportData.topGrowthAreas.map((str: string) => `<li>${str}</li>`).join('')

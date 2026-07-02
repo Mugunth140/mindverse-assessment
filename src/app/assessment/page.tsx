@@ -177,7 +177,7 @@ export default function AssessmentPage() {
       {/* Header & Progress */}
       <header className="bg-white px-6 py-4 shadow-sm border-b border-brand-charcoal/5 sticky top-0 z-50">
         <div className="max-w-4xl mx-auto flex items-center justify-between mb-4">
-          <div className="font-heading font-bold text-brand-indigo text-lg">
+          <div className="font-heading font-bold text-brand-blue text-lg">
             Mindverse
           </div>
           <div className="text-sm font-medium text-brand-charcoal/60">
@@ -215,14 +215,14 @@ export default function AssessmentPage() {
                 </h2>
                 
                 <p className="text-base text-brand-charcoal/60 mb-8 leading-relaxed">
-                  The parent portion is complete. Please hand the device over to <span className="font-bold text-brand-indigo">{userData.studentName}</span> for the math diagnostic.
+                  The parent portion is complete. Please hand the device over to <span className="font-bold text-brand-blue">{userData.studentName}</span> for the math diagnostic.
                 </p>
                 
                 <Button 
                   size="lg" 
                   variant="primary" 
                   onClick={handleNext}
-                  className="w-full h-14 text-base rounded-xl shadow-md shadow-brand-indigo/10 group flex items-center justify-center gap-2"
+                  className="w-full h-14 text-base rounded-xl shadow-md shadow-brand-blue/10 group flex items-center justify-center gap-2"
                 >
                  let&apos;s go!
                 </Button>
@@ -237,7 +237,7 @@ export default function AssessmentPage() {
               transition={{ duration: 0.3 }}
               className="w-full"
             >
-              <Card className="border-none shadow-lg shadow-brand-indigo/5">
+              <Card className="border-none shadow-lg shadow-brand-blue/5">
                 <CardContent className="p-6 md:p-8">
                   <div className="text-xs font-bold tracking-widest text-brand-charcoal/40 uppercase mb-3">
                     {currentSection === "PARENT" ? PARENT_QUESTIONS[currentIndex].section : studentQuestions[currentIndex].domain}
@@ -261,7 +261,7 @@ export default function AssessmentPage() {
                               onClick={() => handleAnswer(rating)}
                               className={`w-12 h-12 md:w-14 md:h-14 rounded-full flex flex-col items-center justify-center font-heading font-bold text-lg transition-all ${
                                 isSelected 
-                                  ? "bg-brand-indigo text-white shadow-[0_4px_0_0_#1a196e] translate-y-[-2px]" 
+                                  ? "bg-brand-blue text-white shadow-[0_4px_0_0_#1a2333] translate-y-[-2px]" 
                                   : "bg-brand-charcoal/5 text-brand-charcoal/70 hover:bg-brand-charcoal/10"
                               }`}
                             >
@@ -285,16 +285,16 @@ export default function AssessmentPage() {
                             onClick={() => handleAnswer(idx)}
                             className={`w-full flex items-center p-3 md:p-4 rounded-xl border-2 text-left transition-all ${
                               isSelected 
-                              ? "border-brand-indigo bg-brand-indigo/5 shadow-[0_2px_0_0_#22208C]" 
-                              : "border-brand-charcoal/10 hover:border-brand-indigo/30 hover:bg-brand-indigo/5"
+                              ? "border-brand-blue bg-brand-blue/5 shadow-[0_2px_0_0_#1a2333]" 
+                              : "border-brand-charcoal/10 hover:border-brand-blue/30 hover:bg-brand-blue/5"
                             }`}
                           >
                             <div className={`w-8 h-8 shrink-0 rounded-full flex items-center justify-center font-bold mr-3 transition-colors ${
-                              isSelected ? "bg-brand-indigo text-white" : "bg-brand-charcoal/10 text-brand-charcoal"
+                              isSelected ? "bg-brand-blue text-white" : "bg-brand-charcoal/10 text-brand-charcoal"
                             }`}>
                               {["A", "B", "C", "D"][idx]}
                             </div>
-                            <span className={`text-base font-medium ${isSelected ? "text-brand-indigo" : "text-brand-charcoal/80"}`}>
+                            <span className={`text-base font-medium ${isSelected ? "text-brand-blue" : "text-brand-charcoal/80"}`}>
                               {opt}
                             </span>
                           </button>

@@ -28,7 +28,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${poppins.variable} h-full antialiased bg-brand-ivory`}
     >
-      <body className="min-h-full flex flex-col font-sans text-brand-charcoal selection:bg-brand-orange/20 selection:text-brand-indigo">
+      <body className="min-h-full flex flex-col font-sans text-brand-charcoal selection:bg-brand-accent/20 selection:text-brand-blue">
         {children}
       </body>
     </html>

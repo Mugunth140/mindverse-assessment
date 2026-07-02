@@ -82,14 +82,9 @@ export default function ResultsPage() {
 
   return (
     <>
-      {/* 
-        ========================================
-        WEB UI (HIDDEN WHEN PRINTING)
-        ========================================
-      */}
       <div className="min-h-screen bg-brand-ivory pb-20 print:hidden">
         {/* Header */}
-        <header className="bg-brand-indigo text-white py-12 px-6 shadow-md relative overflow-hidden">
+        <header className="bg-brand-blue text-white py-12 px-6 shadow-md relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl" />
           <div className="max-w-4xl mx-auto relative z-10 flex flex-col md:flex-row justify-between items-center text-center md:text-left">
             <div>
@@ -97,7 +92,7 @@ export default function ResultsPage() {
                 Diagnostic Report
               </h1>
               <p className="text-lg text-white/80 max-w-xl">
-                Here is the personalized mathematics profile for <span className="font-semibold text-brand-orange">{user.studentName}</span> (Entering Grade {user.gradeLevel}).
+                Here is the personalized mathematics profile for <span className="font-semibold text-brand-accent">{user.studentName}</span> (Entering Grade {user.gradeLevel}).
               </p>
             </div>
             <Button 
@@ -115,15 +110,15 @@ export default function ResultsPage() {
             
             {/* Top Level Summary */}
             <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card className="md:col-span-2 shadow-xl shadow-brand-indigo/5 border-none">
+              <Card className="md:col-span-2 shadow-xl shadow-brand-blue/5 border-none">
                 <CardContent className="p-8 flex flex-col items-center justify-center text-center h-full">
                   <div className="text-sm font-bold tracking-widest text-brand-charcoal/50 uppercase mb-2">Diagnostic Score</div>
-                  <div className="text-7xl font-heading font-black text-brand-indigo mb-2">
+                  <div className="text-7xl font-heading font-black text-brand-blue mb-2">
                     {results.weightedPct}%
                   </div>
                   <div className={`px-5 py-2 rounded-full text-base font-bold mt-2 ${
                     results.readinessLevel.includes("Ready") ? "bg-brand-green/20 text-brand-green" :
-                    results.readinessLevel.includes("Approaching") ? "bg-brand-orange/20 text-brand-orange" :
+                    results.readinessLevel.includes("Approaching") ? "bg-brand-accent/20 text-brand-accent" :
                     "bg-brand-coral/20 text-brand-coral"
                   }`}>
                     {results.readinessLevel}
@@ -134,7 +129,7 @@ export default function ResultsPage() {
                 </CardContent>
               </Card>
 
-              <Card className="shadow-xl shadow-brand-indigo/5 border-none bg-gradient-to-br from-brand-charcoal to-brand-charcoal/90 text-white">
+              <Card className="shadow-xl shadow-brand-blue/5 border-none bg-gradient-to-br from-brand-charcoal to-brand-charcoal/90 text-white">
                 <CardContent className="p-8 flex flex-col items-center justify-center text-center h-full">
                   <div className="text-sm font-bold tracking-widest text-white/50 uppercase mb-4">Parent Insights</div>
                   
@@ -172,7 +167,7 @@ export default function ResultsPage() {
                             <div className="text-xl font-heading font-bold text-brand-charcoal mb-1">{pct}%</div>
                             <div className="h-1.5 w-full bg-brand-charcoal/10 rounded-full overflow-hidden">
                               <div 
-                                className={`h-full ${pct >= 80 ? 'bg-brand-green' : pct >= 50 ? 'bg-brand-orange' : 'bg-brand-coral'}`} 
+                                className={`h-full ${pct >= 80 ? 'bg-brand-green' : pct >= 50 ? 'bg-brand-accent' : 'bg-brand-coral'}`} 
                                 style={{ width: `${pct}%` }} 
                               />
                             </div>
@@ -215,8 +210,8 @@ export default function ResultsPage() {
               <Card className="border-none shadow-lg">
                 <CardHeader>
                   <div className="flex items-center gap-2 mb-1">
-                    <div className="w-6 h-6 rounded-full bg-brand-orange/20 flex items-center justify-center">
-                      <span className="text-brand-orange text-sm font-bold">↓</span>
+                    <div className="w-6 h-6 rounded-full bg-brand-accent/20 flex items-center justify-center">
+                      <span className="text-brand-accent text-sm font-bold">↓</span>
                     </div>
                     <CardTitle className="text-lg">Priority Growth Areas</CardTitle>
                   </div>
@@ -225,8 +220,8 @@ export default function ResultsPage() {
                   {results.topGrowthAreas && results.topGrowthAreas.length > 0 ? (
                     <ul className="space-y-2">
                       {results.topGrowthAreas.map((area: string, i: number) => (
-                        <li key={i} className="flex items-center gap-2 bg-brand-orange/5 p-2 rounded-lg border border-brand-orange/10">
-                          <div className="w-1 h-1 rounded-full bg-brand-orange flex-shrink-0" />
+                        <li key={i} className="flex items-center gap-2 bg-brand-accent/5 p-2 rounded-lg border border-brand-accent/10">
+                          <div className="w-1 h-1 rounded-full bg-brand-accent flex-shrink-0" />
                           <span className="text-sm font-medium text-brand-charcoal/90">{area}</span>
                         </li>
                       ))}
@@ -240,17 +235,17 @@ export default function ResultsPage() {
 
             {/* Course Enrollment CTA */}
             <motion.div variants={itemVariants}>
-              <Card className="border-2 border-brand-indigo bg-brand-indigo/5 relative overflow-hidden">
+              <Card className="border-2 border-brand-blue bg-brand-blue/5 relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-4 opacity-10">
                   <svg width="120" height="120" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
                   </svg>
                 </div>
                 <CardHeader>
-                  <div className="inline-block bg-brand-indigo text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 w-max">
+                  <div className="inline-block bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 w-max">
                     Recommended Course
                   </div>
-                  <CardTitle className="text-2xl text-brand-indigo">Bridge to Middle School Math</CardTitle>
+                  <CardTitle className="text-2xl text-brand-blue">Bridge to Middle School Math</CardTitle>
                   <CardDescription className="text-base text-brand-charcoal/80 max-w-2xl">
                     Turn these diagnostic insights into action! Enroll {user.studentName} in our specialized bootcamp designed to close foundational gaps and build unshakeable math confidence before the school year begins.
                   </CardDescription>
@@ -258,7 +253,7 @@ export default function ResultsPage() {
                 <CardContent>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                     {["Live Expert Instruction", "Targeted Gap Practice", "Confidence Building", "Weekly Progress Reports"].map((feature) => (
-                      <div key={feature} className="bg-white p-3 rounded-xl border border-brand-indigo/10 text-center text-sm font-semibold text-brand-charcoal flex items-center justify-center">
+                      <div key={feature} className="bg-white p-3 rounded-xl border border-brand-blue/10 text-center text-sm font-semibold text-brand-charcoal flex items-center justify-center">
                         {feature}
                       </div>
                     ))}
@@ -280,9 +275,9 @@ export default function ResultsPage() {
       */}
       <div className="hidden print:block bg-white text-black w-full h-[11in] max-h-[11in] overflow-hidden font-sans leading-normal px-8 py-10 box-border relative">
         {/* Print Header */}
-        <div className="border-b-4 border-brand-indigo pb-4 mb-6 flex justify-between items-end">
+        <div className="border-b-4 border-brand-blue pb-4 mb-6 flex justify-between items-end">
           <div>
-            <h1 className="text-3xl font-heading font-black text-brand-indigo tracking-tight uppercase m-0 p-0">Mindverse Learning</h1>
+            <h1 className="text-3xl font-heading font-black text-brand-blue tracking-tight uppercase m-0 p-0">Mindverse Learning</h1>
             <h2 className="text-lg font-bold text-brand-charcoal/80 mt-1 m-0 p-0">Official Diagnostic Report</h2>
           </div>
           <div className="text-right text-xs font-medium text-gray-500 space-y-1">
@@ -294,11 +289,11 @@ export default function ResultsPage() {
 
         <div className="grid grid-cols-2 gap-6 mb-6">
           {/* Main Score Box */}
-          <div className="bg-brand-ivory/50 border-2 border-brand-indigo p-5 rounded-xl">
+          <div className="bg-brand-ivory/50 border-2 border-brand-blue p-5 rounded-xl">
             <div className="text-[10px] font-bold tracking-widest text-brand-charcoal/60 uppercase mb-2">Overall Readiness Score</div>
             <div className="flex items-baseline gap-3">
-              <div className="text-5xl font-heading font-black text-brand-indigo">{results.weightedPct}%</div>
-              <div className="text-sm font-bold text-brand-orange uppercase">{results.readinessLevel}</div>
+              <div className="text-5xl font-heading font-black text-brand-blue">{results.weightedPct}%</div>
+              <div className="text-sm font-bold text-brand-accent uppercase">{results.readinessLevel}</div>
             </div>
             <p className="text-[10px] text-gray-600 mt-2 leading-relaxed">
               This score emphasizes critical pre-algebra domains (Fractions, Operations, Algebraic Thinking) identifying true middle school readiness.
@@ -311,18 +306,18 @@ export default function ResultsPage() {
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <div className="text-[10px] text-gray-500 uppercase font-bold mb-1">Learning Habits</div>
-                <div className="text-base font-bold text-brand-indigo">{results.habits >= 20 ? "Strong" : results.habits >= 14 ? "Developing" : "Building"}</div>
+                <div className="text-base font-bold text-brand-blue">{results.habits >= 20 ? "Strong" : results.habits >= 14 ? "Developing" : "Building"}</div>
               </div>
               <div>
                 <div className="text-[10px] text-gray-500 uppercase font-bold mb-1">Confidence Profile</div>
-                <div className="text-base font-bold text-brand-indigo">{results.confidence >= 20 ? "High" : results.confidence >= 14 ? "Emerging" : "Growing"}</div>
+                <div className="text-base font-bold text-brand-blue">{results.confidence >= 20 ? "High" : results.confidence >= 14 ? "Emerging" : "Growing"}</div>
               </div>
             </div>
           </div>
         </div>
 
         {/* 5 Domains */}
-        <h3 className="text-sm font-heading font-bold text-brand-indigo border-b border-gray-200 pb-1 mb-3 uppercase tracking-wide">Domain Mastery Breakdown</h3>
+        <h3 className="text-sm font-heading font-bold text-brand-blue border-b border-gray-200 pb-1 mb-3 uppercase tracking-wide">Domain Mastery Breakdown</h3>
         <div className="grid grid-cols-5 gap-2 mb-6">
           {Object.entries(results.domainScores || {}).map(([domain, score]: [string, any]) => {
             const pct = Math.round((score.correct / score.total) * 100) || 0;
@@ -331,7 +326,7 @@ export default function ResultsPage() {
                 <div className="text-[8px] font-bold text-gray-500 uppercase leading-tight mb-1 h-6 flex items-center">{domain}</div>
                 <div className="text-lg font-heading font-bold text-black mb-1">{pct}%</div>
                 <div className="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden">
-                  <div className="h-full bg-brand-indigo" style={{ width: `${pct}%` }} />
+                  <div className="h-full bg-brand-blue" style={{ width: `${pct}%` }} />
                 </div>
                 <div className="text-[8px] text-gray-400 mt-1 font-medium">{score.correct} of {score.total} correct</div>
               </div>
@@ -352,7 +347,7 @@ export default function ResultsPage() {
             </ul>
           </div>
           <div>
-            <h3 className="text-xs font-heading font-bold text-brand-orange border-b border-gray-200 pb-1 mb-2 uppercase tracking-wide">Priority Growth Areas</h3>
+            <h3 className="text-xs font-heading font-bold text-brand-accent border-b border-gray-200 pb-1 mb-2 uppercase tracking-wide">Priority Growth Areas</h3>
             <ul className="list-disc pl-4 space-y-1 text-xs text-gray-800 font-medium">
               {results.topGrowthAreas && results.topGrowthAreas.length > 0 ? (
                 results.topGrowthAreas.map((area: string, i: number) => <li key={i}>{area}</li>)
@@ -364,7 +359,7 @@ export default function ResultsPage() {
         </div>
 
         {/* Action Plan */}
-        <div className="bg-brand-indigo text-white p-5 rounded-xl absolute bottom-10 left-8 right-8">
+        <div className="bg-brand-blue text-white p-5 rounded-xl absolute bottom-10 left-8 right-8">
           <h3 className="text-sm font-bold mb-1">Recommended Next Steps</h3>
           <p className="text-[10px] text-white/90 leading-relaxed m-0">
             Based on {user.studentName}'s performance in the priority growth areas, we highly recommend enrolling in the <strong>Bridge to Middle School Math Bootcamp</strong>. This tailored curriculum directly addresses foundational gaps, ensuring a smooth, confident transition into rigorous pre-algebra coursework.

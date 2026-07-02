@@ -29,12 +29,12 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const baseStyles =
-      "inline-flex items-center justify-center rounded-2xl font-heading font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden";
+      "inline-flex items-center justify-center rounded-2xl font-heading font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue disabled:pointer-events-none disabled:opacity-50 relative overflow-hidden";
 
     const variants = {
-      primary: "bg-brand-indigo text-white hover:bg-brand-indigo/90 shadow-[0_4px_0_0_#1a196e] active:shadow-[0_0px_0_0_#1a196e] active:translate-y-[4px]",
-      secondary: "bg-brand-orange text-white hover:bg-brand-orange/90 shadow-[0_4px_0_0_#9e5320] active:shadow-[0_0px_0_0_#9e5320] active:translate-y-[4px]",
-      outline: "border-2 border-brand-indigo text-brand-indigo bg-transparent hover:bg-brand-indigo/5",
+      primary: "bg-brand-blue text-white hover:bg-brand-blue/90 shadow-[0_4px_0_0_#1a2333] active:shadow-[0_0px_0_0_#1a2333] active:translate-y-[4px]",
+      secondary: "bg-brand-accent text-white hover:bg-brand-accent/90 shadow-[0_4px_0_0_#d9534f] active:shadow-[0_0px_0_0_#d9534f] active:translate-y-[4px]",
+      outline: "border-2 border-brand-blue text-brand-blue bg-transparent hover:bg-brand-blue/5",
       ghost: "text-brand-charcoal hover:bg-black/5",
     };
 

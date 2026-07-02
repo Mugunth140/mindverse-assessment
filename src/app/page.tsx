@@ -44,51 +44,59 @@ export default function Home() {
       
       {/* Intentional Geometric Accents with Subtle Animations */}
       <motion.div 
-        className="absolute top-8 left-8 w-24 h-24 bg-brand-coral rounded-full border-[3px] border-brand-indigo hidden lg:block -z-10"
+        className="absolute top-8 left-8 w-24 h-24 bg-brand-coral rounded-full border-[3px] border-brand-blue hidden lg:block -z-10"
         animate={{ scale: [1, 1.05, 1], y: [0, -10, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div 
-        className="absolute bottom-8 right-16 w-32 h-32 bg-brand-green rounded-tl-[80px] rounded-br-[80px] border-[3px] border-brand-indigo hidden lg:block -z-10"
+        className="absolute bottom-8 right-16 w-32 h-32 bg-brand-green rounded-tl-[80px] rounded-br-[80px] border-[3px] border-brand-blue hidden lg:block -z-10"
         animate={{ y: [0, -15, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
       />
       <motion.div 
-        className="absolute top-1/3 right-1/2 w-12 h-12 bg-brand-orange border-[3px] border-brand-indigo hidden lg:block -z-10"
+        className="absolute top-1/3 right-1/2 w-12 h-12 bg-brand-accent border-[3px] border-brand-blue hidden lg:block -z-10"
         animate={{ rotate: [12, 102, 12] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div 
-        className="absolute bottom-1/4 left-1/4 w-8 h-8 bg-brand-lavender rounded-full border-[3px] border-brand-indigo hidden lg:block -z-10"
+        className="absolute bottom-1/4 left-1/4 w-8 h-8 bg-brand-lavender rounded-full border-[3px] border-brand-blue hidden lg:block -z-10"
         animate={{ x: [0, 15, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
       />
 
       {/* Left side: Editorial Typography */}
       <div className="w-full lg:w-1/2 relative z-10 flex flex-col justify-center">
-        <div className="inline-flex border-2 border-brand-indigo bg-brand-lavender text-brand-indigo px-3 py-1.5 rounded-full text-[10px] font-black tracking-widest uppercase mb-6 w-max shadow-[3px_3px_0_0_#22208C]">
+        <div className="inline-flex border-2 border-brand-blue bg-brand-lavender text-brand-blue px-3 py-1.5 rounded-full text-[10px] font-black tracking-widest uppercase mb-6 w-max shadow-[3px_3px_0_0_#1a2333]">
           Bridge to Middle School
         </div>
         
-        <h1 className="text-4xl md:text-5xl lg:text-[4rem] font-heading font-black text-brand-indigo leading-[1.05] mb-6 tracking-tight">
-          Is Your Child <br />
-          Ready for <br />
-          <span className="relative inline-block mt-1">
-            <span className="relative z-10 px-3 py-1 text-white inline-block">Pre-Algebra?</span>
-            <span className="absolute inset-0 bg-brand-orange rounded-xl rotate-2 border-[3px] border-brand-indigo z-0" />
+        <h1 className="text-4xl md:text-5xl lg:text-[4rem] font-heading font-black text-brand-blue leading-[1.1] mb-6 tracking-tight">
+          Is Your Child Truly Ready for {" "}
+          <span className="text-brand-accent relative">
+            Middle School Math?
           </span>
         </h1>
         
-        <p className="text-base md:text-lg text-brand-charcoal max-w-md font-medium leading-relaxed mb-8">
-          Take our 15-minute diagnostic to identify hidden foundational math gaps. Get a personalized report and an immediate action plan.
+        <p className="text-base md:text-lg text-brand-charcoal max-w-lg font-medium leading-relaxed mb-8">
+          Most students who struggle with algebra weren't "bad at math." They had hidden foundational gaps that were never found. This free diagnostic changes that — in 30 minutes.
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-3 text-brand-indigo font-bold">
-          <div className="flex items-center justify-center bg-white border-2 border-brand-indigo px-4 py-2.5 rounded-xl shadow-[3px_3px_0_0_#22208C] text-sm">
-            Free Diagnostic
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-brand-blue">
+          <div className="flex flex-col items-center sm:items-start bg-white border-2 border-brand-blue p-3 rounded-xl shadow-[3px_3px_0_0_#1a2333]">
+            <span className="text-2xl font-heading font-black text-brand-accent">10</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-brand-charcoal/70 mt-1 text-center sm:text-left">Readiness Domains</span>
           </div>
-          <div className="flex items-center justify-center bg-white border-2 border-brand-indigo px-4 py-2.5 rounded-xl shadow-[3px_3px_0_0_#22208C] text-sm">
-            Instant Email Report
+          <div className="flex flex-col items-center sm:items-start bg-white border-2 border-brand-blue p-3 rounded-xl shadow-[3px_3px_0_0_#1a2333]">
+            <span className="text-2xl font-heading font-black text-brand-accent">30</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-brand-charcoal/70 mt-1 text-center sm:text-left">Diagnostic Questions</span>
+          </div>
+          <div className="flex flex-col items-center sm:items-start bg-white border-2 border-brand-blue p-3 rounded-xl shadow-[3px_3px_0_0_#1a2333]">
+            <span className="text-2xl font-heading font-black text-brand-accent">5 min</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-brand-charcoal/70 mt-1 text-center sm:text-left">Parent Questionnaire</span>
+          </div>
+          <div className="flex flex-col items-center sm:items-start bg-white border-2 border-brand-blue p-3 rounded-xl shadow-[3px_3px_0_0_#1a2333]">
+            <span className="text-2xl font-heading font-black text-brand-accent">AI</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-brand-charcoal/70 mt-1 text-center sm:text-left">Personalised Report</span>
           </div>
         </div>
       </div>
@@ -99,17 +107,17 @@ export default function Home() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, type: "spring", bounce: 0.4 }}
-          className="bg-white rounded-[2rem] border-[3px] border-brand-indigo shadow-[8px_8px_0_0_#22208C] p-6 md:p-8 relative"
+          className="bg-white rounded-[2rem] border-[3px] border-brand-blue shadow-[8px_8px_0_0_#1a2333] p-6 md:p-8 relative"
         >
           {/* Decorative clip */}
           <motion.div 
-            className="absolute -top-5 -right-5 w-10 h-10 bg-brand-lavender border-[3px] border-brand-indigo rounded-full shadow-[3px_3px_0_0_#22208C] hidden md:block"
+            className="absolute -top-5 -right-5 w-10 h-10 bg-brand-lavender border-[3px] border-brand-blue rounded-full shadow-[3px_3px_0_0_#1a2333] hidden md:block"
             animate={{ rotate: [0, 15, -5, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
           />
 
           <div className="mb-6">
-            <h2 className="text-2xl font-heading font-black text-brand-indigo mb-1">Get Started</h2>
+            <h2 className="text-2xl font-heading font-black text-brand-blue mb-1">Get Started</h2>
             <p className="text-sm text-brand-charcoal/70 font-medium">Enter your details to begin.</p>
           </div>
           
@@ -117,7 +125,7 @@ export default function Home() {
             <div className="space-y-1">
               <Input 
                 placeholder="Parent's Name" 
-                className="h-12 border border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
+                className="h-12 border border-brand-blue/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
                 {...register("parentName")}
                 error={!!errors.parentName}
               />
@@ -128,7 +136,7 @@ export default function Home() {
               <Input 
                 type="email"
                 placeholder="Parent's Email" 
-                className="h-12 border border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
+                className="h-12 border border-brand-blue/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
                 {...register("email")}
                 error={!!errors.email}
               />
@@ -139,7 +147,7 @@ export default function Home() {
               <Input 
                 type="tel"
                 placeholder="Phone Number" 
-                className="h-12 border border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
+                className="h-12 border border-brand-blue/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
                 {...register("phone")}
                 error={!!errors.phone}
               />
@@ -147,15 +155,15 @@ export default function Home() {
             </div>
 
             <div className="pt-1 pb-1 flex items-center gap-3">
-              <div className="h-[2px] w-full bg-brand-indigo/5 rounded-full" />
-              <span className="text-brand-indigo/40 font-black text-[10px] uppercase tracking-widest">Student</span>
-              <div className="h-[2px] w-full bg-brand-indigo/5 rounded-full" />
+              <div className="h-[2px] w-full bg-brand-blue/5 rounded-full" />
+              <span className="text-brand-blue/40 font-black text-[10px] uppercase tracking-widest">Student</span>
+              <div className="h-[2px] w-full bg-brand-blue/5 rounded-full" />
             </div>
 
             <div className="space-y-1">
               <Input 
                 placeholder="Student's Name" 
-                className="h-12 border border-brand-indigo/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
+                className="h-12 border border-brand-blue/20 bg-brand-ivory/50 font-medium text-base placeholder:text-brand-charcoal/40"
                 {...register("studentName")}
                 error={!!errors.studentName}
               />
@@ -164,8 +172,8 @@ export default function Home() {
 
             {/* Segmented Control for Grade Selection */}
             <div className="space-y-1.5">
-              <label className="text-[11px] font-bold text-brand-indigo ml-1 uppercase tracking-wider">Entering Grade Level</label>
-              <div className="flex bg-brand-ivory/50 border-2 border-brand-indigo/20 rounded-xl p-1 gap-1">
+              <label className="text-[11px] font-bold text-brand-blue ml-1 uppercase tracking-wider">Entering Grade Level</label>
+              <div className="flex bg-brand-ivory/50 border-2 border-brand-blue/20 rounded-xl p-1 gap-1">
                 {["6", "7"].map((grade) => (
                   <button
                     key={grade}
@@ -173,8 +181,8 @@ export default function Home() {
                     onClick={() => setValue("gradeLevel", grade as "6"|"7")}
                     className={`flex-1 py-2 text-sm rounded-lg font-heading font-black transition-all ${
                       selectedGrade === grade 
-                        ? "bg-brand-indigo text-white shadow-md" 
-                        : "bg-transparent text-brand-indigo/50 hover:bg-brand-indigo/10 hover:text-brand-indigo"
+                        ? "bg-brand-blue text-white shadow-md" 
+                        : "bg-transparent text-brand-blue/50 hover:bg-brand-blue/10 hover:text-brand-blue"
                     }`}
                   >
                     Grade {grade}
