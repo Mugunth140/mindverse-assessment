@@ -78,12 +78,12 @@ export default function Home() {
         </h1>
         
         <p className="text-base md:text-lg text-brand-charcoal max-w-lg font-medium leading-relaxed mb-8">
-          Most students who struggle with algebra weren't "bad at math." They had hidden foundational gaps that were never found. This free diagnostic changes that — in 30 minutes.
+          Most students who struggle with algebra weren't <span className="text-indigo-800">"bad at math."</span> They had hidden foundational gaps that were never found. This free diagnostic changes that in 30 minutes.
         </p>
         
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-brand-blue">
           <div className="flex flex-col items-center sm:items-start bg-white border-2 border-brand-blue p-3 rounded-xl shadow-[3px_3px_0_0_#1a2333]">
-            <span className="text-2xl font-heading font-black text-brand-accent">10</span>
+            <span className="text-2xl font-heading font-black text-brand-accent">5</span>
             <span className="text-[10px] font-bold uppercase tracking-wider text-brand-charcoal/70 mt-1 text-center sm:text-left">Readiness Domains</span>
           </div>
           <div className="flex flex-col items-center sm:items-start bg-white border-2 border-brand-blue p-3 rounded-xl shadow-[3px_3px_0_0_#1a2333]">
