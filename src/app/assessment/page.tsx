@@ -6,13 +6,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Card, CardContent } from "@/components/ui/Card";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { PARENT_QUESTIONS } from "@/data/parent_questions";
 import questionBank from "@/data/question_bank.json";
 
-type Section = "PARENT" | "TRANSITION" | "STUDENT";
+type Section = "PARENT" | "PARENT_RESULTS" | "STUDENT";
 
-// Helper to shuffle array
 function shuffleArray<T>(array: T[]): T[] {
   const arr = [...array];
   for (let i = arr.length - 1; i > 0; i--) {
@@ -31,32 +30,48 @@ export default function AssessmentPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [responses, setResponses] = useState<Record<string, string | number>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [linkSent, setLinkSent] = useState(false);
+  const [isSendingLink, setIsSendingLink] = useState(false);
   
   const [studentQuestions, setStudentQuestions] = useState<any[]>([]);
 
-  // Load state on mount
   useEffect(() => {
-    const userStr = localStorage.getItem("mindverse_user");
-    if (!userStr) {
+    let user = null;
+    let resumeMode = false;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const resumeData = urlParams.get('resumeData');
+    
+    if (resumeData) {
+      try {
+        user = JSON.parse(decodeURIComponent(resumeData));
+        localStorage.setItem("mindverse_user", JSON.stringify(user));
+        resumeMode = true;
+      } catch (e) {
+        console.error("Failed to parse resume data");
+      }
+    } else {
+      const userStr = localStorage.getItem("mindverse_user");
+      if (userStr) user = JSON.parse(userStr);
+    }
+
+    if (!user) {
       router.push("/");
       return;
     }
-    const user = JSON.parse(userStr);
+    
     setUserData(user);
     
-    // Initialize & shuffle questions for this specific user
     const gradeKey = `grade${user.gradeLevel}` as keyof typeof questionBank;
     let questionsRaw = (questionBank as any)[gradeKey] || [];
     
-    // Shuffle questions and their choices
     let shuffled = shuffleArray(questionsRaw).map((q: any) => {
-      // Create an array of choice objects so we can track the correct answer's new position
       const choicesWithOriginalIndex = q.choices.map((c: string, i: number) => ({ text: c, isCorrect: i === q.ans }));
       const shuffledChoices = shuffleArray<{text: string, isCorrect: boolean}>(choicesWithOriginalIndex);
       const newAnsIndex = shuffledChoices.findIndex(c => c.isCorrect);
       return {
         ...q,
-        choices: shuffledChoices.map(c => c.text),
+        choices: shuffledChoices.map((c: {text: string}) => c.text),
         ans: newAnsIndex
       };
     });
@@ -64,18 +79,20 @@ export default function AssessmentPage() {
     setStudentQuestions(shuffled);
 
     const savedProgress = localStorage.getItem("mindverse_assessment_progress");
-    if (savedProgress) {
+    if (savedProgress && !resumeMode) {
       const parsed = JSON.parse(savedProgress);
       setCurrentSection(parsed.currentSection);
       setCurrentIndex(parsed.currentIndex);
       setResponses(parsed.responses);
       if (parsed.shuffledQuestions) setStudentQuestions(parsed.shuffledQuestions);
+    } else if (resumeMode) {
+      setCurrentSection("STUDENT");
+      setCurrentIndex(0);
     }
     
     setIsLoaded(true);
   }, [router]);
 
-  // Autosave
   useEffect(() => {
     if (isLoaded && studentQuestions.length > 0) {
       localStorage.setItem("mindverse_assessment_progress", JSON.stringify({
@@ -89,16 +106,17 @@ export default function AssessmentPage() {
 
   if (!isLoaded || !userData || studentQuestions.length === 0) return null;
 
-  const totalQuestions = PARENT_QUESTIONS.length + studentQuestions.length;
-
   const getProgress = () => {
-    if (currentSection === "TRANSITION") return (PARENT_QUESTIONS.length / totalQuestions) * 100;
-    
-    let completed = 0;
-    if (currentSection === "PARENT") completed = currentIndex;
-    if (currentSection === "STUDENT") completed = PARENT_QUESTIONS.length + currentIndex;
-    
-    return (completed / totalQuestions) * 100;
+    if (currentSection === "PARENT") {
+      return (currentIndex / PARENT_QUESTIONS.length) * 100;
+    }
+    if (currentSection === "PARENT_RESULTS") {
+      return 100;
+    }
+    if (currentSection === "STUDENT") {
+      return (currentIndex / studentQuestions.length) * 100;
+    }
+    return 0;
   };
 
   const handleAnswer = (answer: string | number) => {
@@ -111,9 +129,9 @@ export default function AssessmentPage() {
       if (currentIndex < PARENT_QUESTIONS.length - 1) {
         setCurrentIndex(prev => prev + 1);
       } else {
-        setCurrentSection("TRANSITION");
+        setCurrentSection("PARENT_RESULTS");
       }
-    } else if (currentSection === "TRANSITION") {
+    } else if (currentSection === "PARENT_RESULTS") {
       setCurrentSection("STUDENT");
       setCurrentIndex(0);
     } else if (currentSection === "STUDENT") {
@@ -130,15 +148,36 @@ export default function AssessmentPage() {
       if (currentIndex > 0) {
         setCurrentIndex(prev => prev - 1);
       } else {
-        setCurrentSection("TRANSITION");
+        setCurrentSection("PARENT_RESULTS");
       }
-    } else if (currentSection === "TRANSITION") {
+    } else if (currentSection === "PARENT_RESULTS") {
       setCurrentSection("PARENT");
       setCurrentIndex(PARENT_QUESTIONS.length - 1);
     } else if (currentSection === "PARENT") {
       if (currentIndex > 0) {
         setCurrentIndex(prev => prev - 1);
       }
+    }
+  };
+
+  const handleSendLink = async () => {
+    setIsSendingLink(true);
+    try {
+      const res = await fetch('/api/send-link', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user: userData })
+      });
+      if (res.ok) {
+        setLinkSent(true);
+      } else {
+        alert("Failed to send link. Please check your email configuration.");
+      }
+    } catch (e) {
+      console.error(e);
+      alert("Error sending link.");
+    } finally {
+      setIsSendingLink(false);
     }
   };
 
@@ -172,6 +211,38 @@ export default function AssessmentPage() {
   const currentQId = currentSection === "PARENT" ? PARENT_QUESTIONS[currentIndex]?.id : studentQuestions[currentIndex]?.id;
   const currentAnswer = responses[currentQId] ?? null;
 
+  const getParentResults = () => {
+    let rawSum = 0;
+    for (let i = 1; i <= 6; i++) rawSum += (Number(responses[`P${i}`]) || 0);
+    const q7 = Number(responses["P7"]) || 0;
+    const total = rawSum + (6 - q7);
+
+    const CUTOFF_GREEN = 28;
+    const CUTOFF_YELLOW = 17;
+
+    if (total >= CUTOFF_GREEN) {
+      return {
+        zone: "Green",
+        headline: "Your child shows strong math fundamentals.",
+        body: "Based on your responses, your child is building solid habits in math. A quick Student Assessment will confirm their strengths and show where to build even further."
+      };
+    } else if (total >= CUTOFF_YELLOW) {
+      return {
+        zone: "Yellow",
+        headline: "A few patterns stood out in your responses.",
+        body: "Your answers point to some areas worth a closer look. A quick Student Assessment will show exactly where your child stands and what to focus on next."
+      };
+    } else {
+      return {
+        zone: "Red",
+        headline: "There are clear opportunities to strengthen your child's math foundation.",
+        body: "Your responses suggest a few key areas where your child could use extra support. A quick Student Assessment will pinpoint exactly what's needed to help them catch up with confidence."
+      };
+    }
+  };
+
+  const parentResults = currentSection === "PARENT_RESULTS" ? getParentResults() : null;
+
   return (
     <div className="min-h-screen bg-brand-ivory flex flex-col relative pb-32">
       {/* Header & Progress */}
@@ -183,7 +254,7 @@ export default function AssessmentPage() {
           <div className="text-sm font-medium text-brand-charcoal/60">
             {currentSection === "PARENT" ? "Parent Questionnaire" : 
              currentSection === "STUDENT" ? "Student Diagnostic" : 
-             "Transition"}
+             "Parent Insights"}
           </div>
         </div>
         <div className="max-w-4xl mx-auto">
@@ -194,38 +265,52 @@ export default function AssessmentPage() {
       {/* Main Question Area */}
       <main className="flex-1 w-full max-w-2xl mx-auto px-4 py-6 md:p-8 flex flex-col justify-start sm:justify-center">
         <AnimatePresence mode="wait">
-          {currentSection === "TRANSITION" ? (
+          {currentSection === "PARENT_RESULTS" ? (
             <motion.div
-              key="transition"
+              key="parent_results"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
               transition={{ duration: 0.4 }}
               className="text-center w-full max-w-md mx-auto mt-4"
             >
-              <div className="bg-white rounded-3xl p-8 md:p-12 shadow-[0_8px_40px_rgb(0,0,0,0.04)] border border-brand-charcoal/5 flex flex-col items-center">
-                <div 
-                  className="w-16 h-16 bg-brand-green/10 rounded-2xl flex items-center justify-center text-brand-green mb-6"
-                >
-                  <Sparkles className="w-8 h-8" />
-                </div>
-                
-                <h2 className="text-2xl md:text-3xl font-heading font-bold text-brand-charcoal mb-3 tracking-tight">
-                  Thank You!
+              <div className="bg-white rounded-[2rem] border-[3px] border-brand-blue shadow-[8px_8px_0_0_#1a2333] p-8 md:p-12 flex flex-col items-center relative">
+                <h2 className="text-2xl md:text-3xl font-heading font-black text-brand-blue mb-4 tracking-tight text-center relative z-10 leading-snug">
+                  {parentResults?.headline}
                 </h2>
                 
-                <p className="text-base text-brand-charcoal/60 mb-8 leading-relaxed">
-                  The parent portion is complete. Please hand the device over to <span className="font-bold text-brand-blue">{userData.studentName}</span> for the math diagnostic.
+                <p className="text-base text-brand-charcoal/70 mb-10 leading-relaxed text-center max-w-sm relative z-10 font-medium">
+                  {parentResults?.body}
                 </p>
                 
-                <Button 
-                  size="lg" 
-                  variant="primary" 
-                  onClick={handleNext}
-                  className="w-full h-14 text-base rounded-xl shadow-md shadow-brand-blue/10 group flex items-center justify-center gap-2"
-                >
-                 let&apos;s go!
-                </Button>
+                {linkSent ? (
+                  <div className="w-full bg-brand-green/10 text-brand-green border-2 border-brand-green p-4 rounded-xl font-bold text-center relative z-10 shadow-[4px_4px_0_0_#7FAE6D]">
+                    Link sent to {userData?.email}!
+                  </div>
+                ) : (
+                  <div className="flex flex-col w-full gap-4 relative z-10 mt-2">
+                    <div className="flex flex-col gap-2 w-full">
+                      <span className="text-[10px] font-black text-brand-charcoal/40 uppercase tracking-widest text-center">It's free, start now</span>
+                      <Button 
+                        size="lg" 
+                        variant="primary" 
+                        onClick={handleNext}
+                        className="w-full h-16 text-lg rounded-xl shadow-[4px_4px_0_0_#1a2333]"
+                      >
+                        Start Student Diagnostic
+                      </Button>
+                    </div>
+                    <Button 
+                      size="lg" 
+                      variant="outline" 
+                      onClick={handleSendLink}
+                      isLoading={isSendingLink}
+                      className="w-full h-16 text-base rounded-xl font-bold text-brand-blue border-2 border-brand-blue/20 hover:border-brand-blue/50 hover:bg-brand-blue/5"
+                    >
+                      Send test link to email
+                    </Button>
+                  </div>
+                )}
               </div>
             </motion.div>
           ) : (
@@ -289,7 +374,7 @@ export default function AssessmentPage() {
                               : "border-brand-charcoal/10 hover:border-brand-blue/30 hover:bg-brand-blue/5"
                             }`}
                           >
-                            <div className={`w-8 h-8 shrink-0 rounded-full flex items-center justify-center font-bold mr-3 transition-colors ${
+                            <div className={`w-8 h-8 flex-shrink-0 rounded-full flex items-center justify-center font-bold mr-3 transition-colors ${
                               isSelected ? "bg-brand-blue text-white" : "bg-brand-charcoal/10 text-brand-charcoal"
                             }`}>
                               {["A", "B", "C", "D"][idx]}
@@ -310,7 +395,7 @@ export default function AssessmentPage() {
       </main>
 
       {/* Sticky Footer Navigation */}
-      {currentSection !== "TRANSITION" && (
+      {currentSection !== "PARENT_RESULTS" && (
         <div className="fixed bottom-0 left-0 right-0 p-4 bg-brand-ivory border-t border-brand-charcoal/10 z-50 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
           <div className="max-w-2xl mx-auto flex items-center justify-between">
             <Button 
